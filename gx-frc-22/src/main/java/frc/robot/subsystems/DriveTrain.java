@@ -19,9 +19,6 @@ public class DriveTrain extends SubsystemBase {
   public static final double DEADBAND = 0.1;
   public static final double MAX_OUTPUT = 1;
 
-  private Joystick joystickX;
-  private Joystick joystickY;
-
   WPI_TalonFX talonRLeader = new WPI_TalonFX(Constants.TALON_R_LEADER_PORT);
   WPI_TalonFX talonRFollower = new WPI_TalonFX(Constants.TALON_R_FOLLOWER_PORT);
   WPI_TalonFX talonLLeader = new WPI_TalonFX(Constants.TALON_L_LEADER_PORT);
@@ -31,22 +28,15 @@ public class DriveTrain extends SubsystemBase {
   
   // Creates a new DriveTrain
   public DriveTrain() {
-
     talonLFollower.follow(talonLLeader);
     talonRFollower.follow(talonRLeader);
     
-    joystickX = new Joystick(1);
-    joystickY = new Joystick(0);
-
-    //gets values from joysticks
-    double valueY = joystickY.getY();
-    double valueX = joystickX.getX();
-    
     drivetrain.setDeadband(DEADBAND);
     drivetrain.setMaxOutput(MAX_OUTPUT);
-    
-    //uses built in method for arcade drive
-    drivetrain.arcadeDrive(valueY, valueX);
+  }
+
+  public void arcadeDrive(double throttle, double turn) {
+    drivetrain.arcadeDrive(throttle, turn);
   }
 
   @Override
