@@ -15,9 +15,10 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
-
   public static final double DEADBAND = 0.1;
   public static final double MAX_OUTPUT = 1;
+
+  private static DriveTrain driveTrain;
 
   WPI_TalonFX talonRLeader = new WPI_TalonFX(Constants.TALON_R_LEADER_PORT);
   WPI_TalonFX talonRFollower = new WPI_TalonFX(Constants.TALON_R_FOLLOWER_PORT);
@@ -36,7 +37,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double throttle, double turn) {
-    drivetrain.arcadeDrive(throttle, turn);
+    drivetrain.arcadeDrive(-throttle, turn);
   }
 
   @Override
@@ -47,5 +48,10 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public static DriveTrain getInstance() {
+    if (driveTrain == null) driveTrain = new DriveTrain();
+    return driveTrain;
   }
 }
