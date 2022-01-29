@@ -15,19 +15,22 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
+  //drivetrain constants
   public static final double DEADBAND = 0.1;
   public static final double MAX_OUTPUT = 1;
 
   private static DriveTrain driveTrain;
 
+  //create motor objects
   WPI_TalonFX talonRLeader = new WPI_TalonFX(Constants.TALON_R_LEADER_PORT);
   WPI_TalonFX talonRFollower = new WPI_TalonFX(Constants.TALON_R_FOLLOWER_PORT);
   WPI_TalonFX talonLLeader = new WPI_TalonFX(Constants.TALON_L_LEADER_PORT);
   WPI_TalonFX talonLFollower = new WPI_TalonFX(Constants.TALON_L_FOLLOWER_PORT);
 
+  //create DifferentialDrive object
   DifferentialDrive drivetrain = new DifferentialDrive(talonLLeader, talonRLeader);
   
-  // Creates a new DriveTrain
+  //Creates a new DriveTrain and sets the deadband and max output according to drivetrain constants
   public DriveTrain() {
     talonLFollower.follow(talonLLeader);
     talonRFollower.follow(talonRLeader);
@@ -36,6 +39,7 @@ public class DriveTrain extends SubsystemBase {
     drivetrain.setMaxOutput(MAX_OUTPUT);
   }
 
+  //method to drive in arcade style, throttle joystick is the reversed one
   public void arcadeDrive(double throttle, double turn) {
     drivetrain.arcadeDrive(-throttle, turn);
   }
