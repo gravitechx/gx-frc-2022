@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.OI;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.Joystick;
+
 
 /** An example command that uses an example subsystem. */
 public class Drive extends CommandBase {
@@ -32,8 +32,8 @@ public class Drive extends CommandBase {
     //get values from joystick
    // double valueY = -OI.getInstance().getJoystickY().getY();
     //double valueX = OI.getInstance().getJoystickX().getX();
-    double valueY = -OI.getInstance().getController().getLeftY();
-    double valueX = OI.getInstance().getController().getRightX();
+    double valueY = -OI.getInstance().getController().getRawAxis(1);
+    double valueX = OI.getInstance().getController().getRawAxis(2);
 
     //use built in method for arcade drive
     drivetrain.arcadeDrive(valueY, valueX);

@@ -16,8 +16,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
   //drivetrain constants
-  public static final double DEADBAND = 0.1;
-  public static final double MAX_OUTPUT = 1;
+  public static final double DEADBAND = 0.02;
+  public static final double MAX_OUTPUT = 0.8;
+  public static final double VOLT_COMP = 10.0;
+  public static final double AMP_LIMIT = 40.0;
 
   private static DriveTrain driveTrain;
 
@@ -34,9 +36,24 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     talonLFollower.follow(talonLLeader);
     talonRFollower.follow(talonRLeader);
+    talonRLeader.setInverted(true);
+    talonRFollower.setInverted(true);
     
     drivetrain.setDeadband(DEADBAND);
     drivetrain.setMaxOutput(MAX_OUTPUT);
+
+    //sets voltage compensation (very important!)
+    talonRLeader.configVoltageCompSaturation(VOLT_COMP);
+    talonRFollower.configVoltageCompSaturation(VOLT_COMP);
+    talonLLeader.configVoltageCompSaturation(VOLT_COMP);
+    talonLFollower.configVoltageCompSaturation(VOLT_COMP);
+   
+    //sets input current limit to motors
+    //why do you have errors?!!
+    //talonRLeader.configSupplyCurrentLimit(AMP_LIMIT);
+    //talonRFollower.configSupplyCurrentLimit(AMP_LIMIT);
+    //talonLLeader.configSupplyCurrentLimit(AMP_LIMIT);
+    //talonRFollower.configSupplyCurrentLimit(AMP_LIMIT);
   }
 
   //method to drive in arcade style, throttle joystick is the reversed one
