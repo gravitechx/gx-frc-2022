@@ -1,16 +1,14 @@
 package frc.robot.subsystems;
 
 //import com.revrobotics.CANEncoder;
-// Person of unkown identity() had name idea
+// Person of unkown identity(***redacted***) had name idea
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-//Some more imports
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
   /** Creates a new Ball_Intake. */
-public class sucking_ball extends SubsystemBase {
+public class BallSuck extends SubsystemBase {
 CANSparkMax leader = new CANSparkMax(3, MotorType.kBrushless);
 CANSparkMax follower = new CANSparkMax(5, MotorType.kBrushless);
 //find the exact motor ID for our neos
@@ -18,7 +16,7 @@ CANSparkMax follower = new CANSparkMax(5, MotorType.kBrushless);
 // CANEncoder leftEncoder = backLeft.getEncoder();
 // CANEncoder rightEncoder = backRight.getEncoder();
 
-  public sucking_ball() {}
+  public BallSuck() {}
 
   @Override
   public void periodic() {
