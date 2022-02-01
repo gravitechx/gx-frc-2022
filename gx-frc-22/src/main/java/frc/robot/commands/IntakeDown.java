@@ -19,9 +19,10 @@ public class IntakeDown extends CommandBase {
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
+  
   @Override
   public void execute() {
-    BallIntake.getInstance().pneumoDOWN();
+    //BallIntake.getInstance().pneumoDOWN();
   }
 
   // Called once the command ends or is interrupted.
