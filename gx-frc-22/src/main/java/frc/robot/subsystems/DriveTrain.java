@@ -41,7 +41,7 @@ public class DriveTrain extends SubsystemBase {
 
   //method to drive in arcade style, throttle joystick is the reversed one
   public void arcadeDrive(double throttle, double turn) {
-    drivetrain.arcadeDrive(-throttle, turn);
+    drivetrain.arcadeDrive(throttle, turn);
   }
 
   @Override
