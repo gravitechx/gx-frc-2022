@@ -30,10 +30,10 @@ public class Drive extends CommandBase {
   @Override
   public void execute() {
     //get values from joystick
-   // double valueY = -OI.getInstance().getJoystickY().getY();
-    //double valueX = OI.getInstance().getJoystickX().getX();
-    double valueY = -OI.getInstance().getController().getRawAxis(1);
-    double valueX = OI.getInstance().getController().getRawAxis(2);
+    double valueY = -OI.getInstance().getJoystick().getY();
+    double valueX = OI.getInstance().getJoystick().getX();
+    //double valueY = -OI.getInstance().getController().getRawAxis(1);
+    //double valueX = OI.getInstance().getController().getRawAxis(2);
 
     //use built in method for arcade drive
     drivetrain.arcadeDrive(valueY, valueX);
