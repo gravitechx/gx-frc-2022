@@ -29,11 +29,9 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //get values from joystick
-    double valueY = -OI.getInstance().getJoystick().getY();
-    double valueX = OI.getInstance().getJoystick().getX();
-    //double valueY = -OI.getInstance().getController().getRawAxis(1);
-    //double valueX = OI.getInstance().getController().getRawAxis(2);
+    //get values from joysticks
+    double valueY = OI.getInstance().getThrottleAxis();
+    double valueX = OI.getInstance().getTurnAxis();
 
     //use built in method for arcade drive
     drivetrain.arcadeDrive(valueY, valueX);
