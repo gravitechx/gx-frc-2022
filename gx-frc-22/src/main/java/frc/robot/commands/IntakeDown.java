@@ -8,20 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.IntakeArm;
 
-
 public class IntakeDown extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeArm m_subsystem;
-
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public ExampleCommand(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+  /** Creates a new SuckCommand. */
+  public IntakeDown() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements();
+    addRequirements(IntakeArm.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +21,9 @@ public class IntakeDown extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    //BallIntake.getInstance().pneumoUP();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -43,8 +36,6 @@ public class IntakeDown extends CommandBase {
   }
 }
 
-
-  
 
 //delete this later
 //we moved the code to the subsystem
