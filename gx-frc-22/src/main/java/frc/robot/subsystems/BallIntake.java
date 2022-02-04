@@ -10,7 +10,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
@@ -20,12 +19,10 @@ static BallIntake intake;
 
 
 
-//find the exact motor ID for our neos
  
-// CANEncoder leftEncoder = backLeft.getEncoder();
-// CANEncoder rightEncoder = backRight.getEncoder();
 //This is making neos follow each other and is making the follower spin in the opposite direction to the leader
   public BallIntake() {
+    //Setting motors to follow and inverting to make them go the same way
     follower.follow(leader);
     follower.setInverted(true);
   }
@@ -35,7 +32,7 @@ static BallIntake intake;
     // This method will be called once per scheduler run
 
   }
-//This the method that will run the motor speed is |0.7|
+  //This the method that will run the motor speed is |0.7|
   public void runMotor()
   {
     leader.set(0.7);
