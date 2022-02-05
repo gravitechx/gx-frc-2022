@@ -10,10 +10,10 @@ public class OI {
     private static OI oi;
     private Joystick drivecontroller;
 
-    private static final int BUTTON_1 = 0;
-    private static final int BUTTON_2 = 1;
-    private static final int BUTTON_3 = 2;
-    private static final int BUTTON_4 = 3;
+    private static final int BUTTON_1 = 1;
+    private static final int BUTTON_2 = 2;
+    private static final int BUTTON_3 = 3;
+    private static final int BUTTON_4 = 4;
 
 
 
@@ -23,10 +23,10 @@ public class OI {
     }
 
     private void configureButtonBindings() {
-        new JoystickButton(drivecontroller, BUTTON_1).whileHeld(new DriveToPositionMeters(1.0, -1.0, 0.0), true); // left turn
-        new JoystickButton(drivecontroller, BUTTON_2).whileHeld(new DriveToPositionMeters(-1.0, -1.0, 0.0), true); // drive back
-        new JoystickButton(drivecontroller, BUTTON_3).whileHeld(new DriveToPositionMeters(-1.0, 1.0, 0.0), true); // right turn
-        new JoystickButton(drivecontroller, BUTTON_4).whileHeld(new DriveToPositionMeters(1.0, 1.0, 0.0), true); // drive forward
+        new JoystickButton(drivecontroller, BUTTON_1).whileHeld(new DriveToPositionMeters(1.0, -1.0, 0), true); // left turn
+        new JoystickButton(drivecontroller, BUTTON_2).whileHeld(new DriveToPositionMeters(-1.0, -1.0, 0), true); // drive back
+        new JoystickButton(drivecontroller, BUTTON_3).whileHeld(new DriveToPositionMeters(-1.0, 1.0, 0), true); // right turn
+        new JoystickButton(drivecontroller, BUTTON_4).whileHeld(new DriveToPositionMeters(1.0, 1.0, 0), true); // drive forward
     }
 
     public double getDriveX () {

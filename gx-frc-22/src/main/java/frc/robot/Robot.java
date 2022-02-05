@@ -44,8 +44,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getTalonRLeader().getSensorCollection().getIntegratedSensorPosition());
-    SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getTalonLLeader().getSensorCollection().getIntegratedSensorPosition());
+    SmartDashboard.putNumber("Right Encoder", Drivetrain.getInstance().getTalonRLeader().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Left Encoder", Drivetrain.getInstance().getTalonLLeader().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Right Error", Drivetrain.getInstance().getRPositionPIDErrorMeters());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

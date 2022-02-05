@@ -12,6 +12,7 @@ public class DriveToPositionMeters extends CommandBase {
     private final Drivetrain drivetrain;
 
     private double tolerance;
+    private double lefttarget,righttarget;
 
     /*
      * @param subsystem The subsystem used by this command.
@@ -21,15 +22,18 @@ public class DriveToPositionMeters extends CommandBase {
         addRequirements(drivetrain);
 
         this.tolerance = tolerance;
+        lefttarget = distanceL;
+        righttarget = distanceR;
 
-        drivetrain.zeroDriveEncoders();
-        drivetrain.resetPositionPID();
-        drivetrain.setPositionPIDMeters(distanceR, distanceL);
+
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        drivetrain.zeroDriveEncoders();
+        drivetrain.resetPositionPID();
+        drivetrain.setPositionPIDMeters(righttarget, lefttarget);
 
     }
 

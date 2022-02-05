@@ -41,13 +41,13 @@ public class Drivetrain extends SubsystemBase {
 
   private static final double MAX_DRIVE_SUPPLY_CURRENT = 40.0; // amps
   private static final double SUPPLY_CURRENT_TRIP_TIME = 0.5; // seconds
-  private static final double VOLTAGE_COMP_VALUE = 10.0; // volts
+  private static final double VOLTAGE_COMP_VALUE = 6.0; // volts
   private static final int _TIMEOUT = 10; // CAN timeout in ms
 
   // these constants are small because they are based on an error in raw encoder units!
-  private static final double PID_POS_P = 5.1e-6; // proportional
-  private static final double PID_POS_I = 0.0; // integral
-  private static final double PID_POS_D = 0.0; // derivative
+  private static final double PID_POS_P = 2.1e-5; // proportional
+  private static final double PID_POS_I = 1e-5; // integral
+  private static final double PID_POS_D = 2e-6; // derivative
 
   private static final double PID_VEL_S = 0.04; // static adder
   private static final double PID_VEL_F = 0.33; // feed-forward in output/meters_per_second
@@ -164,8 +164,8 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void updatePositionPID() {
-    double Rcom = RPIDcontroller.calculate(talonRLeader.getSelectedSensorPosition());
-    double Lcom = LPIDcontroller.calculate(talonLLeader.getSelectedSensorPosition());
+    double Rcom = Util.constrain(RPIDcontroller.calculate(talonRLeader.getSelectedSensorPosition()), -1.0, 1.0);
+    double Lcom = Util.constrain(LPIDcontroller.calculate(talonLLeader.getSelectedSensorPosition()), -1.0, 1.0);
     talonRLeader.set(ControlMode.PercentOutput, Rcom);
     talonLLeader.set(ControlMode.PercentOutput, Lcom);
   }
