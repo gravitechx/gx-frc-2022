@@ -5,21 +5,19 @@
 package frc.robot.commands;
 
 import frc.robot.OI;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.Joystick;
 
 /** An example command that uses an example subsystem. */
-public class Drive extends CommandBase {
+public class DriveManual extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveTrain drivetrain;
+  private final Drivetrain drivetrain;
 
    /* @param subsystem The subsystem used by this command.
    */
-  public Drive(DriveTrain subsystem) {
-    drivetrain = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+  public DriveManual() {
+    drivetrain = Drivetrain.getInstance();
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -30,11 +28,11 @@ public class Drive extends CommandBase {
   @Override
   public void execute() {
     //get values from joysticks
-    double valueY = OI.getInstance().getJoystickY().getY();
-    double valueX = OI.getInstance().getJoystickX().getX();
+    double valueY = OI.getInstance().getDriveY();
+    double valueX = OI.getInstance().getDriveX();
 
     //use built in method for arcade drive
-    drivetrain.arcadeDrive(valueY, valueX);
+    drivetrain.arcadeDriveSquared(valueY, valueX);
   }
 
   // Called once the command ends or is interrupted.
