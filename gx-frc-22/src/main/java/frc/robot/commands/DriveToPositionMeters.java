@@ -5,6 +5,9 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Drivetrain;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveToPositionMeters extends CommandBase {
@@ -33,20 +36,19 @@ public class DriveToPositionMeters extends CommandBase {
     public void initialize() {
         drivetrain.zeroDriveEncoders();
         drivetrain.resetPositionPID();
-        drivetrain.setPositionPIDMeters(righttarget, lefttarget);
-
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drivetrain.updatePositionPID();
+        drivetrain.setPositionPIDMeters(righttarget, lefttarget);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drivetrain.resetPositionPID();
+        drivetrain.getTalonRLeader().set(ControlMode.PercentOutput, 0);
+        drivetrain.getTalonLLeader().set(ControlMode.PercentOutput, 0);
     }
 
     // Returns true when the command should end.
