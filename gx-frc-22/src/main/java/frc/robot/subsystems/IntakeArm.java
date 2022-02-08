@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.BallIntake;
 
 public class IntakeArm extends SubsystemBase{
@@ -18,7 +19,9 @@ public class IntakeArm extends SubsystemBase{
 
 private static CANSparkMax armFollower = new CANSparkMax(3, MotorType.kBrushless);
 static private CANSparkMax armLeader = new CANSparkMax(5, MotorType.kBrushless);
+static IntakeArm intakeaArm;
 //remember to change the motor ID^
+
 
 //WHAT IS THIS? investigate at ater date
 static BallIntake downArm;
@@ -56,13 +59,13 @@ public final PIDController turnController;
   }
 
   public void IntakeDown(){
-    addRequirements(BallIntake.getInstance());
+    addRequirements(IntakeArm.getInstance());
     armLeader.getEncoder().getPosition();
   
   }
   //gets the position from the encoder 
 
-  private void addRequirements(BallIntake instance) {
+  private void addRequirements(Subsystem subsystem) {
   }
  
   
@@ -91,5 +94,9 @@ public final PIDController turnController;
     
   }
    //the amount (in degrees) that we want the motor to rotate(the length we want the arm to go up/down)
+
+  public static Subsystem getInstance() {
+    return null;
+  }
 
 }

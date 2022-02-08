@@ -13,19 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
-static private CANSparkMax follower = new CANSparkMax(3, MotorType.kBrushless);
 static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
 static BallIntake intake;
 
 
 
- 
-//This is making neos follow each other and is making the follower spin in the opposite direction to the leader
-  public BallIntake() {
-    //Setting motors to follow and inverting to make them go the same way
-    follower.follow(leader);
-    follower.setInverted(true);
-  }
+
 
   @Override
   public void periodic() {

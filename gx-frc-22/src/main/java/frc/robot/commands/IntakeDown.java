@@ -9,7 +9,7 @@ import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.IntakeArm;
 
 public class IntakeDown extends CommandBase {
-  /** Creates a new SuckCommand. */
+  
   public IntakeDown() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(IntakeArm.getInstance());
