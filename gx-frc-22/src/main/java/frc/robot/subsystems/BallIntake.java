@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
 //import com.revrobotics.CANEncoder;
 // Person of unkown identity(***redacted***) had name idea
 import com.revrobotics.CANSparkMax;
