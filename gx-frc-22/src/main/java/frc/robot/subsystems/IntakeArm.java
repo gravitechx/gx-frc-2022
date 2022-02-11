@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
@@ -13,44 +14,29 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.BallIntake;
+//creates new arm
+public class IntakeArm extends SubsystemBase {
+  static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
+  static IntakeArm arm; 
+  // remember to change the motor ID^
 
-public class IntakeArm extends SubsystemBase{
-  /** Creates a new IntakeArm. */
+  // Values need to be changed when hardware is availible for testing
+  private final double Kp = 0.03;
+  private final double Ki = 0.0;
+  private final double Kd = 0.0;
+  // these are the constants that need to later be changed
 
-private static CANSparkMax armFollower = new CANSparkMax(3, MotorType.kBrushless);
-static private CANSparkMax armLeader = new CANSparkMax(5, MotorType.kBrushless);
-static IntakeArm intakeaArm;
-//remember to change the motor ID^
+  public final PIDController turnController;
 
-
-//WHAT IS THIS? investigate at ater date
-static BallIntake downArm;
-
-//Values need to be changed when hardware is availible for testing
-private final double Kp = 0.03;
-private final double Ki = 0.0;
-private final double Kd = 0.0;
-//these are the constants that need to later be changed
-
-
-
-
-
-public final PIDController turnController;
   public IntakeArm() {
-    //Following motor and inverting to make them sync
-    armFollower.follow(armLeader);
-    armFollower.setInverted(true);
-
     turnController = new PIDController(Kp, Ki, Kd, 0.02);
-//takes all the imputs from the PID Controller
 
+    // takes all the inputs from the PID Controller
 
-// turnController.setTolerance(2.0f);
-//this is the tolerance, which is the acceptable amount of error (it can't be perfect, like it is on the graph)
-
-
-//DUMMY VALS THAT NEED TO BE CHANGED^^^
+    // turnController.setTolerance(2.0f);
+    // this is the tolerance, which is the acceptable amount of error (it can't be
+    // perfect, like it is on the graph
+    // DUMMY VALS THAT NEED TO BE CHANGED^^^
   }
 
   @Override
@@ -58,42 +44,40 @@ public final PIDController turnController;
     // This method will be called once per scheduler run
   }
 
-  public void IntakeDown(){
+  // gets arm position from encoder
+  public void IntakeDown() {
     addRequirements(IntakeArm.getInstance());
     armLeader.getEncoder().getPosition();
-  
+
   }
-  //gets the position from the encoder 
 
   private void addRequirements(Subsystem subsystem) {
   }
- 
-  
-  public void pidWrite (double Output){
-    set(ControlType.kPosition, -Output, Output);
+
+  //
+  public void pidWrite(double Output) {
+    set(ControlType.kPosition, Output);
   }
-  //the position of motors
 
-  private void set(ControlType percentoutputControlType, double d, double Output) 
-  {
-
+  // sets the output
+  private void set(ControlType percentoutputControlType, double d, double Output) {
   }
-  //sets the output 
 
-  public void rotateDegrees(double rotation)
-  {
-    armFollower.getEncoder().setPosition(0);
+  public void rotateDegrees(double rotation) {
+    IntakeArm.getEncoder().setPosition(0);
     turnController.reset();
     turnController.setPID(Kp, Ki, Kd);
-    //sets the values again, we have this above, but putting it here again just in case
+    // sets the values again, we have this above, but putting it here again just in
+    // case
     turnController.setSetpoint(rotation);
-    //turnController.
-    //the point that we want the arm to end up at
-   // turnController.start
-    //turns on the controller
-    
+    // turnController.
+    // the point that we want the arm to end up at
+    // turnController.start
+    // turns on the controller
+
   }
-   //the amount (in degrees) that we want the motor to rotate(the length we want the arm to go up/down)
+  // the amount (in degrees) that we want the motor to rotate(the length we want
+  // the arm to go up/down)
 
   public static Subsystem getInstance() {
     return null;
