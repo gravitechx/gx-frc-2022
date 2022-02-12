@@ -12,30 +12,32 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
   /** Creates a new Ball_Intake. */
-public class BallIntake extends SubsystemBase {
+public class EverybotIntake extends SubsystemBase {
 static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
-static BallIntake intake;
 
-
-
-
+static EverybotIntake intake;
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
   }
-  //This the method that will run the motor speed is |0.7|
-  public void runMotor()
+
+  public void ballIn()
   {
     leader.set(0.7);
   }
 
+  public void ballOut()
+  {
+    leader.set(-0.7);
+  }
+
   // Singleton - makes only one instance of BallIntake
-  public static BallIntake getInstance(){
+  public static EverybotIntake getInstance(){
     if(intake == null)
     {
-      intake = new BallIntake();
+      intake = new EverybotIntake();
     }
 
     return intake;

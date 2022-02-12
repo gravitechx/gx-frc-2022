@@ -13,7 +13,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.EverybotIntake;
 //creates new arm
 public class IntakeArm extends SubsystemBase {
   static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
@@ -21,7 +21,7 @@ public class IntakeArm extends SubsystemBase {
   // remember to change the motor ID^
 
   // Values need to be changed when hardware is availible for testing
-  private final double Kp = 0.03;
+  private final double Kp = 0.0;
   private final double Ki = 0.0;
   private final double Kd = 0.0;
   // these are the constants that need to later be changed
@@ -56,7 +56,8 @@ public class IntakeArm extends SubsystemBase {
 
   //
   public void pidWrite(double Output) {
-    set(ControlType.kPosition, Output);
+    set(ControlType.kPosition, Kd, Output);
+    //Whats the second output for?
   }
 
   // sets the output
@@ -64,7 +65,7 @@ public class IntakeArm extends SubsystemBase {
   }
 
   public void rotateDegrees(double rotation) {
-    IntakeArm.getEncoder().setPosition(0);
+    armLeader.getEncoder().setPosition(0);
     turnController.reset();
     turnController.setPID(Kp, Ki, Kd);
     // sets the values again, we have this above, but putting it here again just in
