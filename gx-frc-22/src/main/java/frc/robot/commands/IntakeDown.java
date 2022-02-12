@@ -5,14 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.EverybotIntake;
-import frc.robot.subsystems.IntakeArm;
+import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.BigIntakeArm;
 
 public class IntakeDown extends CommandBase {
   
   public IntakeDown() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(IntakeArm.getInstance());
+    addRequirements(BigIntakeArm.getInstance());
   }
 
   // Called when the command is initially scheduled.

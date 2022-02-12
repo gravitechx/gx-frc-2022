@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
   /** Creates a new Ball_Intake. */
-public class EverybotIntake extends SubsystemBase {
+public class BallIntake extends SubsystemBase {
 static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
 
-static EverybotIntake intake;
+static BallIntake intake;
 
   @Override
   public void periodic() {
@@ -23,21 +23,25 @@ static EverybotIntake intake;
 
   }
 
+
+  //Starts sucking in balls
   public void ballIn()
   {
     leader.set(0.7);
   }
 
+
+  //Starts shooting out balls
   public void ballOut()
   {
     leader.set(-0.7);
   }
 
   // Singleton - makes only one instance of BallIntake
-  public static EverybotIntake getInstance(){
+  public static BallIntake getInstance(){
     if(intake == null)
     {
-      intake = new EverybotIntake();
+      intake = new BallIntake();
     }
 
     return intake;

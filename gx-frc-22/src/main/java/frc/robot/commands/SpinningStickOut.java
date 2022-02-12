@@ -5,13 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BigIntakeArm;
+import frc.robot.subsystems.BallIntake;
 
-public class IntakeUp extends CommandBase {
-  /** Creates a new SuckCommand. */
-  public IntakeUp() {
+
+public class SpinningStickOut extends CommandBase {
+
+  int value = 0;
+
+  /** Creates a new SpinningStick. */
+  public SpinningStickOut() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(BigIntakeArm.getInstance());
+    addRequirements(BallIntake.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -21,7 +25,7 @@ public class IntakeUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //BallIntake.getInstance().pneumoUP();
+    BallIntake.getInstance().ballOut();
   }
 
   // Called once the command ends or is interrupted.
@@ -34,7 +38,3 @@ public class IntakeUp extends CommandBase {
     return false;
   }
 }
-
-
-//delete this later
-//we moved the code to the subsystem
