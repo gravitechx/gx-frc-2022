@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import frc.robot.subsystems.*;
-import frc.robot.commands.*;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Drive;
