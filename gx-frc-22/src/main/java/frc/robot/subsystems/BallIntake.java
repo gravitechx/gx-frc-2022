@@ -25,12 +25,17 @@ static BallIntake intake;
     // This method will be called once per scheduler run
 
   }
-  //This the method that will run the motor speed is |0.7|
-  public void runMotor()
+  //This the method that will run the motor, speed is |0.7|
+  //runs motor to intake ball
+  public void runMotorI()
   {
     leader.set(0.7);
   }
-
+  //runs motor to outtake ball
+  public void runMotorO()
+  {
+    leader.set(-0.7);
+  }
   // Singleton - makes only one instance of BallIntake
   public static BallIntake getInstance(){
     if(intake == null)
@@ -40,8 +45,5 @@ static BallIntake intake;
 
     return intake;
   }
-
-  
-
-  }
+}
 

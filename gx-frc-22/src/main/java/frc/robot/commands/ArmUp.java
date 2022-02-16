@@ -5,12 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.IntakeArm;
 
-public class IntakeDown extends CommandBase {
-  
-  public IntakeDown() {
+public class ArmUp extends CommandBase {
+  /** Creates a new SuckCommand. */
+  public ArmUp() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(IntakeArm.getInstance());
   }

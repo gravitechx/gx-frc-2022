@@ -7,9 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallIntake;
 
-public class IntakeCommand extends CommandBase {
+public class IntakeBall extends CommandBase {
   /** Creates a new SuckCommand. */
-  public IntakeCommand() {
+  public IntakeBall() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(BallIntake.getInstance());
   }
@@ -21,7 +21,9 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallIntake.getInstance().runMotor();
+    if (OI.getInstance().getIntakeButton()) {
+    BallIntake.getInstance().runMotorI();
+    }
   }
 
   // Called once the command ends or is interrupted.
