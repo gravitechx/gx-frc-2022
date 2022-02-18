@@ -18,6 +18,6 @@ public final class Constants {
     public static final int TALON_R_LEADER_PORT = 2;
     public static final int TALON_R_FOLLOWER_PORT = 5;
 
-    public static final int JOYSTICK_L_PORT = 0;
-    public static final int JOYSTICK_R_PORT = 1;
+    public static final int CONTROLLER_PORT = 0;
+   
 }
