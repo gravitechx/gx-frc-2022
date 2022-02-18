@@ -10,7 +10,7 @@ import frc.robot.subsystems.BigIntakeArm;
 public class PositionArm extends CommandBase {
   /** Creates a new PositionArm. */
   public PositionArm() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(BigIntakeArm.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -20,12 +20,11 @@ public class PositionArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(OI.getInstance().getPositionButton()){
-
-      BigIntakeArm.getInstance()
+      if(OI.getInstance().getArmUpButton())
+      ((BigIntakeArm) BigIntakeArm.getInstance()).rotateDegrees(0);
+      //Added cast to method reciever thing, dont treally know what it does, but fixes error!
     }
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override

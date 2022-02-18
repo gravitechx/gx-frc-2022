@@ -18,9 +18,8 @@ import frc.robot.subsystems.BallIntake;
 public class BigIntakeArm extends SubsystemBase {
   static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
   static BigIntakeArm arm; 
-  // remember to change the motor ID^
+  // remember to change the motor ID when we know what it is^
 
-  // Values need to be changed when hardware is availible for testing
   private final double Kp = 0.0;
   private final double Ki = 0.0;
   private final double Kd = 0.0;
@@ -41,7 +40,7 @@ public class BigIntakeArm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+  // This method will be called once per scheduler run
   }
 
   // gets arm position from encoder
@@ -54,10 +53,9 @@ public class BigIntakeArm extends SubsystemBase {
   private void addRequirements(Subsystem subsystem) {
   }
 
-  //
+  
   public void pidWrite(double Output) {
     set(ControlType.kPosition, Kd, Output);
-    //Whats the second output for?
   }
 
   // sets the output
@@ -71,14 +69,12 @@ public class BigIntakeArm extends SubsystemBase {
     // sets the values again, we have this above, but putting it here again just in
     // case
     turnController.setSetpoint(rotation);
-    // turnController.
     // the point that we want the arm to end up at
     // turnController.start
     // turns on the controller
 
   }
-  // the amount (in degrees) that we want the motor to rotate(the length we want
-  // the arm to go up/down)
+  // the amount (in degrees) that we want the motor to rotate(the length we want the arm to go up/down)
 
   public static Subsystem getInstance() {
     return null;
