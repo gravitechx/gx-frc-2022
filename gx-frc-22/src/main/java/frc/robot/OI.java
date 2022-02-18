@@ -3,18 +3,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class OI {
-    //define which button or joystick is used here
+    //define which button or joystick is used here 
     private static final int DRIVE_THROTTLE_AXIS = 1;
     private static final int DRIVE_TURN_AXIS = 2;
+    //buttons below are PLACEHOLDERS
     private static final int BALL_INTAKE_BUTTON = 3;
     private static final int BALL_OUTTAKE_BUTTON = 4;
+    private static final int ARM_UP_BUTTON = 5;
+    private static final int ARM_DOWN_BUTTON = 6;
 
     private static OI oi;
     private XboxController gameController;
 
     //create instance of gamepad
     private OI () {
-        gameController = new XboxController(0);
+        gameController = new XboxController(Constants.CONTROLLER_PORT);
     }
 
     public XboxController getController() {
@@ -38,6 +41,14 @@ public class OI {
     //hold outtake button to spin balls outward
     public boolean getOuttakeButton() {
         return gameController.getRawButton(BALL_OUTTAKE_BUTTON);
+    }
+
+    public boolean ArmUpButton() {
+        return gameController.getRawButtonPressed(ARM_UP_BUTTON);
+    }
+
+    public boolean ArmDownButton() {
+        return gameController.getRawButtonPressed(ARM_DOWN_BUTTON);
     }
 
     //add your button and methods of those buttons here, define your buttons up top
