@@ -3,6 +3,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import java.lang.Math;
 
 public class OI {
     //define which button or joystick is used here
@@ -21,13 +22,13 @@ public class OI {
         return gameController;
     }
 
-    //return joystick inputs for driving
+    //return joystick inputs for driving, squared to reduce sensitivity
     public double getThrottleAxis() {
-        return -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
+        return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), 5);
     }
 
     public double getTurnAxis() {
-        return gameController.getRawAxis(DRIVE_TURN_AXIS);
+        return Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), 5);
     }
 
     //add your buttons and methods of those buttons here, define your buttons up top

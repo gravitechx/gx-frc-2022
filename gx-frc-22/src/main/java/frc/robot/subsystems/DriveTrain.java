@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -56,7 +56,7 @@ public class DriveTrain extends SubsystemBase {
 
   //method to drive in arcade style, throttle joystick is the reversed one
   public void arcadeDrive(double throttle, double turn) {
-    drivetrain.arcadeDrive(throttle, turn);
+    drivetrain.arcadeDrive(throttle, turn, false);
   }
 
   public void setDriveEncoder(int value) {
