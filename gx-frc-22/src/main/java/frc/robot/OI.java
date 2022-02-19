@@ -16,7 +16,7 @@ public class OI {
     //create instance of gamepad
     private OI () {
         gameController = new XboxController(0);
-    }
+    }0
 
     public XboxController getController() {
         return gameController;
