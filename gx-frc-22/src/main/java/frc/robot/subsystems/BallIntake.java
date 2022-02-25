@@ -29,12 +29,12 @@ static BallIntake intake;
   //runs motor to intake ball
   public void runMotorI()
   {
-    leader.set(0.7);
+    leader.set(0.2);
   }
   //runs motor to outtake ball
   public void runMotorO()
   {
-    leader.set(-0.7);
+    leader.set(-0.2);
   }
   // Singleton - makes only one instance of BallIntake
   public static BallIntake getInstance(){

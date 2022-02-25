@@ -56,7 +56,7 @@ public class IntakeArm extends SubsystemBase {
 
   //
   public void pidWrite(double Output) {
-    set(ControlType.kPosition, Output);
+    //set(ControlType.kPosition, Output);
   }
 
   // sets the output
@@ -64,7 +64,7 @@ public class IntakeArm extends SubsystemBase {
   }
 
   public void rotateDegrees(double rotation) {
-    IntakeArm.getEncoder().setPosition(0);
+    //IntakeArm.getEncoder().setPosition(0);
     turnController.reset();
     turnController.setPID(Kp, Ki, Kd);
     // sets the values again, we have this above, but putting it here again just in

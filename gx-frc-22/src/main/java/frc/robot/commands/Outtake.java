@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallIntake;
+import frc.robot.OI;
 
 public class Outtake extends CommandBase {
   /** Creates a new SuckCommand. */
