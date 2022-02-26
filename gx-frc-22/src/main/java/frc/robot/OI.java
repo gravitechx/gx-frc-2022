@@ -7,10 +7,10 @@ public class OI {
     private static final int DRIVE_THROTTLE_AXIS = 1;
     private static final int DRIVE_TURN_AXIS = 2;
     //buttons below are PLACEHOLDERS
-    private static final int BALL_INTAKE_BUTTON = 6;
+    private static final int BALL_INTAKE_BUTTON = 0;
     private static final int BALL_OUTTAKE_BUTTON = 0;
-    private static final int ARM_UP_BUTTON = 0;
-    private static final int ARM_DOWN_BUTTON = 0;
+    private static final int ARM_UP_BUTTON = 6;
+    private static final int ARM_DOWN_BUTTON = 7;
 
     private static OI oi;
     private XboxController gameController;

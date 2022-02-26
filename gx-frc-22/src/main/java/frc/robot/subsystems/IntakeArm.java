@@ -13,10 +13,11 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.subsystems.BallIntake;
 //creates new arm
 public class IntakeArm extends SubsystemBase {
-  static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
+  static private CANSparkMax armLeader= new CANSparkMax(Constants.ARM_MOTOR_PORT, MotorType.kBrushless);
   static IntakeArm arm; 
   // remember to change the motor ID^
 
@@ -29,6 +30,7 @@ public class IntakeArm extends SubsystemBase {
   public final PIDController turnController;
 
   public IntakeArm() {
+    armLeader.restoreFactoryDefaults();
     turnController = new PIDController(Kp, Ki, Kd, 0.02);
 
     // takes all the inputs from the PID Controller
@@ -59,8 +61,13 @@ public class IntakeArm extends SubsystemBase {
     //set(ControlType.kPosition, Output);
   }
 
+  public void stop() {
+    armLeader.set(0);
+  }
+
   // sets the output
-  private void set(ControlType percentoutputControlType, double d, double Output) {
+  public void rotate(double speed) {
+    armLeader.set(speed);
   }
 
   public void rotateDegrees(double rotation) {
@@ -79,8 +86,9 @@ public class IntakeArm extends SubsystemBase {
   // the amount (in degrees) that we want the motor to rotate(the length we want
   // the arm to go up/down)
 
-  public static Subsystem getInstance() {
-    return null;
+  public static IntakeArm getInstance() {
+    if (arm == null) arm = new IntakeArm();
+    return arm;
   }
 
 }

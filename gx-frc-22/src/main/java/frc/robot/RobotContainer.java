@@ -6,9 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ArmUp;
 import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.BallIntake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.IntakeArm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,7 +37,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
+
+    //armUp.whenActive(new ArmUp(IntakeArm.getInstance()));
+    armUp.whenHeld(new ArmUp(IntakeArm.getInstance()));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
