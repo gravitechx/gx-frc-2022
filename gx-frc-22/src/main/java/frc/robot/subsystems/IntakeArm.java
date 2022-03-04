@@ -14,10 +14,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.BallIntake;
-//creates new arm
-public class BigIntakeArm extends SubsystemBase {
+
+public class IntakeArm extends SubsystemBase {
+  //instantiates motor
   static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
-  static BigIntakeArm arm; 
+  static IntakeArm arm; 
   // remember to change the motor ID^
 
   // Values need to be changed when hardware is availible for testing
@@ -28,7 +29,7 @@ public class BigIntakeArm extends SubsystemBase {
 
   public final PIDController turnController;
 
-  public BigIntakeArm() {
+  public IntakeArm() {
     turnController = new PIDController(Kp, Ki, Kd, 0.02);
 
     // takes all the inputs from the PID Controller
@@ -44,9 +45,9 @@ public class BigIntakeArm extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  // gets arm position from encoder
-  public void IntakeDown() {
-    addRequirements(BigIntakeArm.getInstance());
+  // gets motor position from encoder
+  public void IntakePosition() {
+    addRequirements(IntakeArm.getInstance());
     armLeader.getEncoder().getPosition();
 
   }
@@ -54,16 +55,16 @@ public class BigIntakeArm extends SubsystemBase {
   private void addRequirements(Subsystem subsystem) {
   }
 
-  //
+  //Passes the output directly to setSetpoint().
   public void pidWrite(double Output) {
     set(ControlType.kPosition, Kd, Output);
-    //Whats the second output for?
   }
 
   // sets the output
   private void set(ControlType percentoutputControlType, double d, double Output) {
   }
 
+  //rotate motor to the angle we want (described by "rotation")
   public void rotateDegrees(double rotation) {
     armLeader.getEncoder().setPosition(0);
     turnController.reset();
@@ -71,8 +72,6 @@ public class BigIntakeArm extends SubsystemBase {
     // sets the values again, we have this above, but putting it here again just in
     // case
     turnController.setSetpoint(rotation);
-    // turnController.
-    // the point that we want the arm to end up at
     // turnController.start
     // turns on the controller
 
