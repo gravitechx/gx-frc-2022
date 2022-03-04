@@ -5,7 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BigIntakeArm;
+import frc.robot.subsystems.IntakeArm;
+import frc.robot.OI;
 
 public class ResetArm extends CommandBase {
   /** Creates a new ResetArm. */
@@ -19,10 +20,10 @@ public class ResetArm extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute(IntakeArm OI) {
 
-  if(OI.getInstance().getArmDownButton())
-    ((BigIntakeArm) BigIntakeArm.getInstance()).rotateDegrees(0);
+  if(((Object) OI.getInstance()).ArmDownButton())
+    ((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
     //Added cast to method reciever thing, dont treally know what it does, but fixes error!
   }
 

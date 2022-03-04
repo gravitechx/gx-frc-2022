@@ -5,12 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BigIntakeArm;
+import frc.robot.OI;
+import frc.robot.subsystems.IntakeArm;
 
 public class PositionArm extends CommandBase {
   /** Creates a new PositionArm. */
   public PositionArm() {
-    addRequirements(BigIntakeArm.getInstance());
+    addRequirements(IntakeArm.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -18,10 +19,11 @@ public class PositionArm extends CommandBase {
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
+  //everybot22
   @Override
   public void execute() {
-      if(OI.getInstance().getArmUpButton())
-      ((BigIntakeArm) BigIntakeArm.getInstance()).rotateDegrees(0);
+      if(OI.getInstance().ArmUpButton())
+      ((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
       //Added cast to method reciever thing, dont treally know what it does, but fixes error!
     }
   

@@ -60,4 +60,8 @@ public class OI {
         if (oi == null) oi = new OI();
         return oi;
     }
+
+    public boolean getArmUpButton() {
+        return false;
+    }
 }
