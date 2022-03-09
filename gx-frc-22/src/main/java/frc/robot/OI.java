@@ -8,7 +8,7 @@ import java.lang.Math;
 public class OI {
     //define which button or joystick is used here
     private static final int DRIVE_THROTTLE_AXIS = 1;
-    private static final int DRIVE_TURN_AXIS = 2;
+    private static final int DRIVE_TURN_AXIS = 4;
 
     private static OI oi;
     private XboxController gameController;
