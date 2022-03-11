@@ -22,9 +22,10 @@ public class PositionArm extends CommandBase {
   //everybot22
   @Override
   public void execute() {
-      if(OI.getInstance().ArmUpButton())
-      ((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
-      //Added cast to method reciever thing, dont treally know what it does, but fixes error!
+    IntakeArm.getInstance().Spin();
+      //if(OI.getInstance().ArmUpButton())
+      //((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
+      // Added cast to method reciever thing, dont treally know what it does, but fixes error!
     }
   
 

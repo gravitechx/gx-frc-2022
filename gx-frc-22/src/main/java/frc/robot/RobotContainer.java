@@ -12,6 +12,7 @@ import frc.robot.commands.SpinningStickOut;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.PositionArm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -38,11 +39,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 4);
-    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 5);
+    JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
+    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
+    //0 indexing? what do these numbers correspond to on the controller?
 
-    intakeIn.whenHeld(new SpinningStickIn());
-    intakeOut.whenHeld(new SpinningStickOut());
+    intakeIn.whenHeld(new PositionArm());
+    intakeOut.whenHeld(new PositionArm());
   }
 
   /**

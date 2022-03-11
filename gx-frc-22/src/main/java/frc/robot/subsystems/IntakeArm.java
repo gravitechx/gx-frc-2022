@@ -17,7 +17,7 @@ import frc.robot.subsystems.BallIntake;
 
 public class IntakeArm extends SubsystemBase {
   //instantiates motor
-  static private CANSparkMax armLeader= new CANSparkMax(5, MotorType.kBrushless);
+  static private CANSparkMax armLeader = new CANSparkMax(4, MotorType.kBrushless);
   static IntakeArm arm; 
   // remember to change the motor ID^
 
@@ -79,8 +79,14 @@ public class IntakeArm extends SubsystemBase {
   // the amount (in degrees) that we want the motor to rotate(the length we want
   // the arm to go up/down)
 
-  public static Subsystem getInstance() {
-    return null;
+    //TEMPORARY TESTER
+  public void Spin() {
+    armLeader.set(0.3);
+  }
+
+  public static IntakeArm getInstance() {
+    if (arm == null) arm = new IntakeArm();
+    return arm;
   }
 
 }
