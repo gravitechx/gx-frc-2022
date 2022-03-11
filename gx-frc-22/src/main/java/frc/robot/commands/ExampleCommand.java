@@ -5,12 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeArm;
-import frc.robot.OI;
+import frc.robot.subsystems.ExampleSubsystem;
 
-public class ResetArm extends CommandBase {
-  /** Creates a new ResetArm. */
-  public ResetArm() {
+public class ExampleCommand extends CommandBase {
+  /** Creates a new ExampleCommand. */
+  public ExampleCommand(ExampleSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -20,12 +19,7 @@ public class ResetArm extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-
-    //if (((Object) OI.getInstance()).ArmDownButton())
-      //((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
-      //Added cast to method reciever thing, dont treally know what it does, but fixes error!
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
