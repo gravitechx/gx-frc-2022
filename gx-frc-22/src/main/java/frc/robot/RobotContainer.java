@@ -41,7 +41,7 @@ public class RobotContainer {
     JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
 
     //armUp.whenActive(new ArmUp(IntakeArm.getInstance()));
-    armUp.whenHeld(new ArmUp(IntakeArm.getInstance()));
+    armUp.whenPressed(new ArmUp(IntakeArm.getInstance()));
   }
 
   /**
