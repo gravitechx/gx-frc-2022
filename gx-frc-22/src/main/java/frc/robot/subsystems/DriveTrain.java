@@ -65,7 +65,7 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive diffdrive = new DifferentialDrive(talonLLeader, talonRLeader);
 
   // Creates a new DriveTrain
-  public Drivetrain() {
+  public DriveTrain() {
     diffdrive.setDeadband(DEADBAND);
     diffdrive.setMaxOutput(MAX_OUTPUT);
 
@@ -221,9 +221,9 @@ public class DriveTrain extends SubsystemBase {
     consumer.accept(talonLLeader);
   }
 
-  public static Drivetrain getInstance() {
+  public static DriveTrain getInstance() {
     if (drivetrain == null) {
-      drivetrain = new Drivetrain();
+      drivetrain = new DriveTrain();
     }
     return drivetrain;
   }

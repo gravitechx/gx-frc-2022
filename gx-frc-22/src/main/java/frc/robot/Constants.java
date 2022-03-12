@@ -13,5 +13,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final int TALON_L_LEADER_PORT = 3;
+    public static final int TALON_L_FOLLOWER_PORT = 1;
+    public static final int TALON_R_LEADER_PORT = 2;
+    public static final int TALON_R_FOLLOWER_PORT = 5;
 
-    public static final int CONTROLLER_PORT = 0;}
+    public static final int CONTROLLER_PORT = 0;
+}
