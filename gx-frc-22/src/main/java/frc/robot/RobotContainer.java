@@ -38,10 +38,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 0);
 
     //armUp.whenActive(new ArmUp(IntakeArm.getInstance()));
-    armUp.whenPressed(new ArmUp(IntakeArm.getInstance()));
+    armUp.whenHeld(new IntakeBall(Ball.getInstance()));
   }
 
   /**
