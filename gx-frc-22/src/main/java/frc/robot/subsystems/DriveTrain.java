@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Util;
 
-public class Drivetrain extends SubsystemBase {
+public class DriveTrain extends SubsystemBase {
 
-  private static Drivetrain drivetrain;
+  private static DriveTrain drivetrain;
 
   private static final double WHEEL_DIAMETER = 0.1524; // wheel diameter in meters
   private static final double GEAR_RATIO = 10.714; // motor rotations : wheel rotations
