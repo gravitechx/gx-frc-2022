@@ -43,8 +43,8 @@ public class RobotContainer {
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
     //0 indexing? what do these numbers correspond to on the controller?
 
-    intakeIn.whenHeld(new PositionArm());
-    intakeOut.whenHeld(new PositionArm());
+    intakeIn.whenHeld(new PositionArm(0.07));
+    intakeOut.whenHeld(new PositionArm(-0.07));
   }
 
   /**

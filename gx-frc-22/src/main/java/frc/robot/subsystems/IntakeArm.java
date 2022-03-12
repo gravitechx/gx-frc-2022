@@ -80,8 +80,8 @@ public class IntakeArm extends SubsystemBase {
   // the arm to go up/down)
 
     //TEMPORARY TESTER
-  public void Spin() {
-    armLeader.set(0.3);
+  public void Spin(double speed) {
+    armLeader.set(speed);
   }
 
   public static IntakeArm getInstance() {

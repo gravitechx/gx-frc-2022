@@ -10,7 +10,10 @@ import frc.robot.subsystems.IntakeArm;
 
 public class PositionArm extends CommandBase {
   /** Creates a new PositionArm. */
-  public PositionArm() {
+  double speed;
+  public PositionArm(double temp) {
+    speed = temp;
+
     addRequirements(IntakeArm.getInstance());
   }
 
@@ -22,7 +25,7 @@ public class PositionArm extends CommandBase {
   //everybot22
   @Override
   public void execute() {
-    IntakeArm.getInstance().Spin();
+    IntakeArm.getInstance().Spin(speed);
       //if(OI.getInstance().ArmUpButton())
       //((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
       // Added cast to method reciever thing, dont treally know what it does, but fixes error!
@@ -31,7 +34,9 @@ public class PositionArm extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    IntakeArm.getInstance().Spin(0.05);
+  }
 
   // Returns true when the command should end.
   @Override
