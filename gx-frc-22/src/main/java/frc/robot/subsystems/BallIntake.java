@@ -37,6 +37,8 @@ static BallIntake intake;
     leader.set(-0.7);
   }
 
+  
+
   // Singleton - makes only one instance of BallIntake
   public static BallIntake getInstance(){
     if(intake == null)
