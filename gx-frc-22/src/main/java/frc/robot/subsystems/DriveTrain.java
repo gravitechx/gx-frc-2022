@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends SubsystemBase {
   //drivetrain constants
-  public static final double DEADBAND = 0.1;
+  public static final double DEADBAND = 0.05;
   public static final double MAX_OUTPUT = 1.0;
   public static final double VOLT_COMP = 6.0;
   public static final double AMP_LIMIT = 40.0;
@@ -65,20 +65,25 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void autoDrive(long time) {
+    //amount = 0;
     long t = System.currentTimeMillis();
-    long end = t + 10;
+    long end = t + 4000;
 
     while(System.currentTimeMillis() < end) {
       SmartDashboard.putNumber("Amount", amount++);
+      arcadeDrive(0.5, 0);
 
-      try {
+      /*try {
         Thread.sleep(99L);
-      } catch (InterruptedException e) {}
+      } catch (InterruptedException e) {
+        
+      }*/
     }
   }
 
-  private void print() {
-
+  public void stop() {
+    talonLLeader.set(0);
+    talonRLeader.set(0);
   }
 
   public void setDriveEncoder(int value) {

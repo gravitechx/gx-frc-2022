@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
     //define which button or joystick is used here 
     private static final int DRIVE_THROTTLE_AXIS = 1;
-    private static final int DRIVE_TURN_AXIS = 2;
+    private static final int DRIVE_TURN_AXIS = 4;
     //buttons below are PLACEHOLDERS
     private static final int BALL_INTAKE_BUTTON = 3;
     private static final int BALL_OUTTAKE_BUTTON = 4;
