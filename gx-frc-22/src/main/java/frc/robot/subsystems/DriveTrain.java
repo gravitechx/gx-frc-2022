@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 import frc.robot.Constants;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -57,6 +60,25 @@ public class DriveTrain extends SubsystemBase {
   //method to drive in arcade style, throttle joystick is the reversed one
   public void arcadeDrive(double throttle, double turn) {
     drivetrain.arcadeDrive(throttle, turn);
+  }
+
+  public void autoDrive(long time) {
+    System.out.println();
+
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+      public void run() {
+        System.out.println("X Seconds");
+      }
+    };
+
+    timer.schedule(task, 4L);
+    timer.schedule(task, time);
+    timer.schedule(task, 10L);
+  }
+
+  private void print() {
+
   }
 
   public void setDriveEncoder(int value) {
