@@ -45,7 +45,7 @@ public class DriveTrain extends SubsystemBase {
   // the PID controller outputs -1028 to 1028
   // error of 100 encoder ticks with a O of 0.1 results in an output of 10/1028, ~1%.
   private static final int PID_POS_SLOT = 0; // PID constants slot, 0-3
-  private static final double PID_POS_S = 0.04; // static adder for stiction
+  //private static final double PID_POS_S = 0.04; // static adder for stiction
   private static final double PID_POS_P = 0.021; // proportional
   private static final double PID_POS_I = 0.0001; // integral
   private static final double PID_POS_D = 0.01; // derivative
@@ -153,10 +153,10 @@ public class DriveTrain extends SubsystemBase {
   // sets the position PID controller targets
   
   public void setPositionPIDMeters(double Rtarget) {
-    talonRLeader.set(ControlMode.Position, Rtarget * METER_TO_ENCODER,
-      DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
-    talonLLeader.set(ControlMode.Position, Ltarget * METER_TO_ENCODER,
-      DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
+   // talonRLeader.set(ControlMode.Position, Rtarget * METER_TO_ENCODER,
+     // DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
+    //talonLLeader.set(ControlMode.Position, Ltarget * METER_TO_ENCODER,
+     // DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
   }
 
   public double getRPositionPIDErrorMeters() {
