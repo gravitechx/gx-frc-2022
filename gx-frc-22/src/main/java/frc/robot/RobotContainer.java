@@ -6,12 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ArmUp;
 import frc.robot.commands.PositionArm;
 
 /**
@@ -22,9 +21,9 @@ import frc.robot.commands.PositionArm;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -42,11 +41,15 @@ public class RobotContainer {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
     JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 5);
-    
+    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 4);
+
     //0 indexing? what do these numbers correspond to on the controller?
 
     intakeIn.whenHeld(new PositionArm(0.07));
     intakeOut.whenHeld(new PositionArm(-0.07));
+    armUp.whenPressed(new ArmUp(10,0.1));
+    armDown.whenPressed(new ArmUp(-10,0.1));
+
   }
 
   /**
@@ -59,4 +62,3 @@ public class RobotContainer {
     return m_autoCommand;
     */
   }
-}

@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class ArmUp extends CommandBase {
 
-    private static final double movementDistance = 0;
+    private static final double movementDistance = 100;
 
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final DriveTrain drivetrain;

@@ -57,7 +57,7 @@ public class IntakeArm extends SubsystemBase {
 
   //Passes the output directly to setSetpoint().
   public void pidWrite(double Output) {
-    armLeader.set();
+    armLeader.set(0.3);
   }
 
   //rotate motor to the angle we want (described by "rotation")
