@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends SubsystemBase {
   //drivetrain constants
@@ -22,6 +23,7 @@ public class DriveTrain extends SubsystemBase {
   public static final double MAX_OUTPUT = 1.0;
   public static final double VOLT_COMP = 6.0;
   public static final double AMP_LIMIT = 40.0;
+  public double amount = 0.0;
 
   // private wheel =
   // 1.5 feet per wheel rotation
@@ -64,22 +66,15 @@ public class DriveTrain extends SubsystemBase {
 
   public void autoDrive(long time) {
     long t = System.currentTimeMillis();
-    long end = t + 10000;
+    long end = t + 10;
 
     while(System.currentTimeMillis() < end) {
-      System.out.println("AAAAAAH");
+      SmartDashboard.putNumber("Amount", amount++);
+
+      try {
+        Thread.sleep(99L);
+      } catch (InterruptedException e) {}
     }
-
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-      public void run() {
-        System.out.println("X Seconds");
-      }
-    };
-
-    timer.schedule(task, 15L);
-    timer.schedule(task, time);
-    timer.schedule(task, 19L);
   }
 
   private void print() {
