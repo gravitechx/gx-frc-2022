@@ -22,7 +22,7 @@ public class AutoTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getInstance().autoDrive(5L);
+    DriveTrain.getInstance().autoDrive(17L);
   }
 
   // Called once the command ends or is interrupted.

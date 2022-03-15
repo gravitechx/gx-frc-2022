@@ -63,7 +63,12 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void autoDrive(long time) {
-    System.out.println();
+    long t = System.currentTimeMillis();
+    long end = t + 10000;
+
+    while(System.currentTimeMillis() < end) {
+      System.out.println("AAAAAAH");
+    }
 
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
@@ -72,9 +77,9 @@ public class DriveTrain extends SubsystemBase {
       }
     };
 
-    timer.schedule(task, 4L);
+    timer.schedule(task, 15L);
     timer.schedule(task, time);
-    timer.schedule(task, 10L);
+    timer.schedule(task, 19L);
   }
 
   private void print() {
