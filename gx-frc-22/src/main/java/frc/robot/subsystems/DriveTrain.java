@@ -106,7 +106,7 @@ public class DriveTrain extends SubsystemBase {
     talonRLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     talonLLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
-
+  
   public static DriveTrain getInstance() {
     if (driveTrain == null) driveTrain = new DriveTrain();
     return driveTrain;

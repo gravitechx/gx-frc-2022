@@ -9,8 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
 static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
@@ -23,22 +21,20 @@ static BallIntake intake;
 
   }
 
+  //REMINDER: Add speeds to constants (ask edwin)
 
   //Starts sucking in balls
-  public void ballIn()
-  {
+  public void ballIn() {
     leader.set(0.7);
   }
 
-
   //Starts shooting out balls
-  public void ballOut()
-  {
+  public void ballOut() {
     leader.set(-0.7);
   }
 
   // Singleton - makes only one instance of BallIntake
-  public static BallIntake getInstance(){
+  public static BallIntake getInstance() {
     if(intake == null)
     {
       intake = new BallIntake();
