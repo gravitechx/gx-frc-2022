@@ -21,7 +21,7 @@ public class BigIntakeArm extends SubsystemBase {
   // remember to change the motor ID^
 
   // Values need to be changed when hardware is availible for testing
-  private final double Kp = 0.0;
+  private final double Kp = 0.03;
   private final double Ki = 0.0;
   private final double Kd = 0.0;
   // these are the constants that need to later be changed
@@ -48,7 +48,6 @@ public class BigIntakeArm extends SubsystemBase {
   public void IntakeDown() {
     addRequirements(BigIntakeArm.getInstance());
     armLeader.getEncoder().getPosition();
-
   }
 
   private void addRequirements(Subsystem subsystem) {
