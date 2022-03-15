@@ -40,8 +40,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 5);
-    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 4);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 0);
+    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
 
     //0 indexing? what do these numbers correspond to on the controller?
 
