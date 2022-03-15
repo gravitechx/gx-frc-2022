@@ -41,6 +41,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 5);
+    
     //0 indexing? what do these numbers correspond to on the controller?
 
     intakeIn.whenHeld(new PositionArm(0.07));
@@ -52,8 +54,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+    */
   }
 }

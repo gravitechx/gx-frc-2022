@@ -152,7 +152,7 @@ public class DriveTrain extends SubsystemBase {
 
   // sets the position PID controller targets
   
-  public void setPositionPIDMeters(double Rtarget, double Ltarget) {
+  public void setPositionPIDMeters(double Rtarget) {
     talonRLeader.set(ControlMode.Position, Rtarget * METER_TO_ENCODER,
       DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
     talonLLeader.set(ControlMode.Position, Ltarget * METER_TO_ENCODER,

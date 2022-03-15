@@ -9,25 +9,26 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveToPositionMeters extends CommandBase {
+public class ArmUp extends CommandBase {
+
+    private static final double movementDistance = 0;
+
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final DriveTrain drivetrain;
 
     private double tolerance;
-    private double lefttarget,righttarget;
+    private double distance;
 
     /*
      * @param subsystem The subsystem used by this command.
      */
 
-    public DriveToPositionMeters(double distanceR, double distanceL, double tolerance) {
+    public ArmUp(double distance, double tolerance) {
         drivetrain = DriveTrain.getInstance();
         addRequirements(drivetrain);
 
         this.tolerance = tolerance;
-        lefttarget = distanceL;
-        righttarget = distanceR;
-
+        distance = movementDistance;
 
     }
 
@@ -41,22 +42,20 @@ public class DriveToPositionMeters extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drivetrain.setPositionPIDMeters(righttarget, lefttarget);
+        drivetrain.setPositionPIDMeters(distance);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         drivetrain.getTalonRLeader().set(ControlMode.PercentOutput, 0);
-        drivetrain.getTalonLLeader().set(ControlMode.PercentOutput, 0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        double Lerror = drivetrain.getLPositionPIDErrorMeters();
-        double Rerror = drivetrain.getRPositionPIDErrorMeters();
-        if (Math.abs(Lerror) < tolerance && Math.abs(Rerror) < tolerance) { // if the controller is within the tolerance
+        double uperror = drivetrain.getLPositionPIDErrorMeters();
+        if (Math.abs(uperror) < tolerance) { // if the controller is within the tolerance
             return true;
         }
         return false;

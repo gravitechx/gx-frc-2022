@@ -43,6 +43,7 @@ public class OI {
         return gameController.getRawButton(BALL_OUTTAKE_BUTTON);
     }
 
+    //press button once to fully raise or lower arm
     public boolean ArmUpButton() {
         return gameController.getRawButtonPressed(ARM_UP_BUTTON);
     }
