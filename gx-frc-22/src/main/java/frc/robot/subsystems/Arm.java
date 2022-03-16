@@ -21,25 +21,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
-    CANSparkMax motor = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
+    CANSparkMax motor = new CANSparkMax(Constants.NEO_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 4096);
+    RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
 
     private static Arm arm;
 
     SparkMaxPIDController controller = motor.getPIDController();
 
     // Gains
-    double kP = 0;
-    double kI = 0;
-    double kD = 0;
-    double kF = 0;
-    double kIZone = 0;
+    double kP = 0.021;
+    double kI = 0.0001;
+    double kD = 0.01;
+    double kF = 0.0472;
+    double kIZone = 0.04;
     
    
 
     public Arm() {
-        encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION);
+        encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 15);
 
         controller.setP(kP);
         controller.setI(kI);
@@ -50,13 +50,12 @@ public class Arm extends SubsystemBase {
         controller.setOutputRange(-1, 1);
     }
 
-    public void drive(double f, double t) {
-        
-    }
-
     public void PID(double distance) {
         controller.setReference(distance, ControlType.kPosition);
-        
+    }
+
+    public double PIDError() {
+      return encoder.getPosition() / 15;
     }
 
     @Override
@@ -68,12 +67,14 @@ public class Arm extends SubsystemBase {
       return motor;
     }
 
+    public void ZeroArmEncoder() {
+      encoder.setPosition(0);
+    }
+
     public static Arm getInstance() {
       if (arm == null) {
         arm = new Arm();
       }
       return arm;
     }
-
-    
 }

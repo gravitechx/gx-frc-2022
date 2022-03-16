@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 //import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 
@@ -27,14 +28,14 @@ static BallIntake intake;
   //Starts sucking in balls
   public void ballIn()
   {
-    leader.set(0.7);
+    leader.set(Constants.SPIN_SPEED);
   }
 
 
   //Starts shooting out balls
   public void ballOut()
   {
-    leader.set(-0.7);
+    leader.set(Constants.SPIN_SPEED_REVERSE);
   }
 
   

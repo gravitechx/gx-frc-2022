@@ -3,12 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
  
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.DriveTrain;
+
 
 public class ArmUp extends CommandBase {
 
@@ -36,8 +34,8 @@ public class ArmUp extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        drivetrain.zeroDriveEnco();
-        drivetrain.resetPositionPID();
+        drivetrain.ZeroArmEncoder();
+       // drivetrain.resetPositionPID();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -49,13 +47,13 @@ public class ArmUp extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drivetrain.getMotor().set(ControlMode.PercentOutput, 0);
+        drivetrain.getMotor().set(0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        double uperror = drivetrain.getLPositionPIDErrorMeters();
+        double uperror = drivetrain.PIDError();
         if (Math.abs(uperror) < tolerance) { // if the controller is within the tolerance
             return true;
         }

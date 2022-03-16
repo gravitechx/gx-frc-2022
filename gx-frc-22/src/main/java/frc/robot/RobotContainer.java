@@ -46,8 +46,8 @@ public class RobotContainer {
 
     intakeIn.whenHeld(new PositionArm(0.07));
     intakeOut.whenHeld(new PositionArm(-0.07));
-    armUp.whenPressed(new ArmUp(10,0.1));
-    armDown.whenPressed(new ArmUp(-10,0.1));
+    armUp.whenPressed(new ArmUp(10, 500000));
+    armDown.whenPressed(new ArmUp(-10, 500000));
 
   }
 
