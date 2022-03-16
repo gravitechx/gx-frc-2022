@@ -22,9 +22,9 @@ import frc.robot.commands.AutoTest;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrain m_exampleSubsystem = new DriveTrain();
+  private final DriveTrain autoSubsystem = DriveTrain.getInstance();
 
-  private final Drive m_autoCommand = new Drive(m_exampleSubsystem);
+  private final AutoTest autoCommand = new AutoTest();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,6 +51,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return autoCommand;
   }
 }

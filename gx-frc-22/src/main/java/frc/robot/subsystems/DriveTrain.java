@@ -5,9 +5,6 @@
 package frc.robot.subsystems;
 import frc.robot.Constants;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -67,7 +64,7 @@ public class DriveTrain extends SubsystemBase {
   public void autoDrive(long time) {
     //amount = 0;
     long t = System.currentTimeMillis();
-    long end = t + 4000;
+    long end = t + time;
 
     while(System.currentTimeMillis() < end) {
       SmartDashboard.putNumber("Amount", amount++);
