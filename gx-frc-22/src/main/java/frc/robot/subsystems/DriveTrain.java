@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+/*
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
@@ -14,6 +14,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,18 +26,14 @@ public class DriveTrain extends SubsystemBase {
 
   private static DriveTrain drivetrain;
 
-  private static final double WHEEL_DIAMETER = 0.1524; // wheel diameter in meters
-  private static final double GEAR_RATIO = 10.714; // motor rotations : wheel rotations
-  private static final double MOTOR_ENCODER_EPR = 2048; // encoder ticks per revolution
-  private static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
-  // meters * ( wheelrotation/meters * motorrotation/wheelrotation * encoderticks/motorrotation ) = encoderticks
-  public static final double METER_TO_ENCODER = 1/WHEEL_CIRCUMFERENCE * GEAR_RATIO * MOTOR_ENCODER_EPR;
-  // converts meters per second to encoder ticks per 100ms
-  public static final double MPS_TO_ENCP100MS = 0.1*METER_TO_ENCODER;
 
-  private static final double DEADBAND = 0.1; // 0-1
-  private static final double MAX_OUTPUT = 1.0; // 0-1
-  public static final double MAX_SPEED = 3.0; // 3m/s max
+  private static final double MOTOR_ENCODER_EPR = 2048; // encoder ticks per revolution
+  // meters * ( wheelrotation/meters * motorrotation/wheelrotation * encoderticks/motorrotation ) = encoderticks
+  // converts meters per second to encoder ticks per 100ms
+
+
+
+ 
 
   private static final double MAX_DRIVE_SUPPLY_CURRENT = 40.0; // amps
   private static final double SUPPLY_CURRENT_TRIP_TIME = 0.5; // seconds
@@ -57,18 +55,15 @@ public class DriveTrain extends SubsystemBase {
   private static final double PID_VEL_I = 0.0;
   private static final double PID_VEL_D = 0.0;
 
-  WPI_TalonFX talonRLeader = new WPI_TalonFX(Constants.TALON_R_LEADER_PORT);
-  WPI_TalonFX talonRFollower = new WPI_TalonFX(Constants.TALON_R_FOLLOWER_PORT);
-  WPI_TalonFX talonLLeader = new WPI_TalonFX(Constants.TALON_L_LEADER_PORT);
-  WPI_TalonFX talonLFollower = new WPI_TalonFX(Constants.TALON_L_FOLLOWER_PORT);
+  
+  static private CANSparkMax ArmUp = new CANSparkMax(4, MotorType.kBrushless)
 
-  DifferentialDrive diffdrive = new DifferentialDrive(talonLLeader, talonRLeader);
 
-  // Creates a new DriveTrain
+ 
+
+  /* Creates a new DriveTrain
   public DriveTrain() {
-    diffdrive.setDeadband(DEADBAND);
-    diffdrive.setMaxOutput(MAX_OUTPUT);
-
+    
     applyToAllDrive((motor) -> motor.configFactoryDefault(_TIMEOUT)); // reset all configs
 
     // set up followers and inversions
@@ -128,27 +123,16 @@ public class DriveTrain extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public void arcadeDrive(double throttle, double turn) {
-    diffdrive.arcadeDrive(throttle, turn);
-  }
-
-  public void arcadeDriveSquared(double throttle, double turn) {
-    diffdrive.arcadeDrive(throttle, turn, true);
-  }
+  
+  
 
   public void zeroDriveEncoders() {
     talonRLeader.setSelectedSensorPosition(0);
-    talonLLeader.setSelectedSensorPosition(0);
+  
   }
 
   // resets the position PID controller integral/error and sets the output to 0%
-  public void resetPositionPID() {
-    applyToAllLeaders(motor -> motor.config_kP(PID_POS_SLOT, PID_POS_P, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.config_kI(PID_POS_SLOT, PID_POS_I, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.config_kD(PID_POS_SLOT, PID_POS_D, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.selectProfileSlot(PID_POS_SLOT, 0));
-    applyToAllLeaders(motor -> motor.set(ControlMode.PercentOutput, 0));
-  }
+
 
   // sets the position PID controller targets
   
@@ -159,68 +143,25 @@ public class DriveTrain extends SubsystemBase {
      // DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
   }
 
-  public double getRPositionPIDErrorMeters() {
-    return talonRLeader.getClosedLoopError()/METER_TO_ENCODER;
-  }
-
-  public double getLPositionPIDErrorMeters() {
-    return talonLLeader.getClosedLoopError()/METER_TO_ENCODER;
-  }
-
-  // resets the velocity PID controller integral/error and sets the output to 0%
-  public void resetVelocityPID() {
-    applyToAllLeaders(motor -> motor.config_kP(PID_VEL_SLOT, PID_VEL_P, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.config_kI(PID_VEL_SLOT, PID_VEL_I, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.config_kD(PID_VEL_SLOT, PID_VEL_D, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.config_kF(PID_VEL_SLOT, PID_VEL_F, _TIMEOUT));
-    applyToAllLeaders(motor -> motor.selectProfileSlot(PID_VEL_SLOT, 0));
-    applyToAllLeaders(motor -> motor.set(ControlMode.PercentOutput, 0));
-  }
+  
 
   // sets the velocity PID controller targets
   public void setVelocityPIDMetersPerSecond(double Rtarget, double Ltarget) {
     Rtarget = Util.constrain(Rtarget, -MAX_SPEED, MAX_SPEED); // keep within limits
-    Ltarget = Util.constrain(Ltarget, -MAX_SPEED, MAX_SPEED);
     double Rcom = Math.signum(Rtarget) * PID_VEL_S; // static feedforward
-    double Lcom = Math.signum(Ltarget) * PID_VEL_S;
+    
 
     // command motor controllers
-    talonRLeader.set(ControlMode.PercentOutput, Rtarget*MPS_TO_ENCP100MS, 
-      DemandType.ArbitraryFeedForward, Rcom); 
-    talonLLeader.set(ControlMode.PercentOutput, Ltarget*MPS_TO_ENCP100MS, 
-      DemandType.ArbitraryFeedForward, Lcom);
+   
+    
   } 
 
   // getters for the drivemotors in case we need their encoder values or something
-  public WPI_TalonFX getTalonRLeader() {
-    return talonRLeader;
-  }
-
-  public WPI_TalonFX getTalonRFollower() {
-    return talonRFollower;
-  }
-
-  public WPI_TalonFX getTalonLLeader() {
-    return talonLLeader;
-  }
-
-  public WPI_TalonFX getTalonLFollower() {
-    return talonLFollower;
-  }
+  
 
   // a Java lamba that applies a setting to all of something. See the constructor of this class for usage. 
   // Copied from HarkerRoboLib HSSwerve.
-  public void applyToAllDrive(Consumer<WPI_TalonFX> consumer) {
-    consumer.accept(talonRLeader);
-    consumer.accept(talonLLeader);
-    consumer.accept(talonRFollower);
-    consumer.accept(talonLFollower);
-  }
-
-  public void applyToAllLeaders(Consumer<WPI_TalonFX> consumer) {
-    consumer.accept(talonRLeader);
-    consumer.accept(talonLLeader);
-  }
+  
 
   public static DriveTrain getInstance() {
     if (drivetrain == null) {
@@ -230,3 +171,4 @@ public class DriveTrain extends SubsystemBase {
   }
 
 }
+*/

@@ -7,6 +7,7 @@ package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.ControlMode;
  
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 
 public class ArmUp extends CommandBase {
@@ -14,7 +15,7 @@ public class ArmUp extends CommandBase {
     private static final double movementDistance = 100;
 
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final DriveTrain drivetrain;
+    private final Arm drivetrain;
 
     private double tolerance;
     private double distance;
@@ -24,7 +25,7 @@ public class ArmUp extends CommandBase {
      */
 
     public ArmUp(double distance, double tolerance) {
-        drivetrain = DriveTrain.getInstance();
+        drivetrain = Arm.getInstance();
         addRequirements(drivetrain);
 
         this.tolerance = tolerance;
