@@ -24,7 +24,8 @@ public class Arm extends SubsystemBase {
     CANSparkMax motor = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 4096);
-   
+
+    private static Arm arm;
 
     SparkMaxPIDController controller = motor.getPIDController();
 
@@ -60,6 +61,19 @@ public class Arm extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+    
     }
+
+    public CANSparkMax getMotor(){
+      return motor;
+    }
+
+    public static Arm getInstance() {
+      if (arm == null) {
+        arm = new Arm();
+      }
+      return arm;
+    }
+
+    
 }

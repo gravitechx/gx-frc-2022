@@ -36,20 +36,20 @@ public class ArmUp extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        drivetrain.zeroDriveEncoders();
+        drivetrain.zeroDriveEnco();
         drivetrain.resetPositionPID();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drivetrain.setPositionPIDMeters(distance);
+        drivetrain.PID(distance);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drivetrain.getTalonRLeader().set(ControlMode.PercentOutput, 0);
+        drivetrain.getMotor().set(ControlMode.PercentOutput, 0);
     }
 
     // Returns true when the command should end.
