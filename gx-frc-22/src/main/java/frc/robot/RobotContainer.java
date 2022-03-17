@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.PositionArm;
+import frc.robot.commands.Test;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -42,13 +43,14 @@ public class RobotContainer {
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
     JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 0);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
+    JoystickButton test = new JoystickButton(OI.getInstance().getController(), 5);
 
 
     intakeIn.whenHeld(new PositionArm(0.07));
     intakeOut.whenHeld(new PositionArm(-0.07));
     armUp.whenPressed(new ArmUp(10, 500000));
     armDown.whenPressed(new ArmUp(-10, 500000));
-
+    test.whenPressed(new Test());
   }
 
   /**

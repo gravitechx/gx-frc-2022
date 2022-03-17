@@ -15,9 +15,11 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
@@ -25,33 +27,36 @@ public class Arm extends SubsystemBase {
 
     RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
 
-    private static Arm arm;
-
-    SparkMaxPIDController controller = motor.getPIDController();
-
     // Gains
     double kP = 0.021;
     double kI = 0.0001;
     double kD = 0.01;
     double kF = 0.0472;
     double kIZone = 0.04;
-    
-   
+
+    private static Arm arm;
+
+    SparkMaxPIDController controller = motor.getPIDController();
+    PIDController pid = new PIDController(kP, kI, kD);
 
     public Arm() {
-        encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 3);
+      encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 3);
 
-        controller.setP(kP);
-        controller.setI(kI);
-        controller.setD(kD);
-        controller.setFF(kF);
-        controller.setIZone(kIZone);
+      controller.setP(kP);
+      controller.setI(kI);
+      controller.setD(kD);
+      controller.setFF(kF);
+      controller.setIZone(kIZone);
 
-        controller.setOutputRange(-1, 1);
+      controller.setOutputRange(-1, 1);
+    }
+
+    public void test(double distance) {
+      motor.set(pid.calculate(encoder.getPosition(), distance));
     }
 
     public void PID(double distance) {
-        controller.setReference(distance, ControlType.kPosition);
+      controller.setReference(distance, ControlType.kPosition);
     }
 
     public double PIDError() {
@@ -65,6 +70,10 @@ public class Arm extends SubsystemBase {
 
     public CANSparkMax getMotor(){
       return motor;
+    }
+
+    public PIDController getController() {
+      return pid;
     }
 
     public void ZeroArmEncoder() {
