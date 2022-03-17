@@ -46,47 +46,48 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     // Simple camera code. This line of code works.
-    // CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
 
     // More complex camera code. Camera code (including above) are from https://docs.wpilib.org/en/stable/docs/software/vision-processing/roborio/using-the-cameraserver-on-the-roborio.html
-    m_visionThread = 
-      new Thread(
-        () -> {
+    // A lot of lagging.
+    // m_visionThread = 
+    //   new Thread(
+    //     () -> {
 
-          // Get USB Camera from CameraServer.
-          UsbCamera camera = CameraServer.startAutomaticCapture();
-          // Resolution
-          camera.setResolution(RESOLUTION_X, RESOLUTION_Y);
+    //       // Get USB Camera from CameraServer.
+    //       UsbCamera camera = CameraServer.startAutomaticCapture();
+    //       // Resolution
+    //       camera.setResolution(RESOLUTION_X, RESOLUTION_Y);
 
-          // Get a CvSink.
-          CvSink cvSink = CameraServer.getVideo();
-          // Open CvSource, which gives images to the dashboard.
-          CvSource outputStream = CameraServer.putVideo("Rectangle", RESOLUTION_X, RESOLUTION_Y);
+    //       // Get a CvSink.
+    //       CvSink cvSink = CameraServer.getVideo();
+    //       // Open CvSource, which gives images to the dashboard.
+    //       CvSource outputStream = CameraServer.putVideo("Rectangle", RESOLUTION_X, RESOLUTION_Y);
 
-          Mat mat = new Mat();
+    //       Mat mat = new Mat();
 
-          // This can't be true, as the program will not close if it is. This is meant
-          while (!Thread.interrupted()) {
+    //       // This can't be true, as the program will not close if it is. This is meant
+    //       while (!Thread.interrupted()) {
 
-            // CvSink has to take a frame, put it in source mat.
+    //         // CvSink has to take a frame, put it in source mat.
 
-            // Errors.
-            if (cvSink.grabFrame(mat) == 0) {
-              // Send stream the error.
-              outputStream.notifyError(cvSink.getError());
+    //         // Errors.
+    //         if (cvSink.grabFrame(mat) == 0) {
+    //           // Send stream the error.
+    //           outputStream.notifyError(cvSink.getError());
 
-              // skip current iteration
-              continue;
-            }
+    //           // skip current iteration
+    //           continue;
+    //         }
       
-            // Put rectangle in the picture.
-            Imgproc.rectangle(mat, new Point(100,100), new Point(400, 400), new Scalar(255, 255, 255), 5);
-            // Place output stream a new image, now with a picture.
-            outputStream.putFrame(mat);
-          }
-        });
-      m_visionThread.setDaemon(true);
-      m_visionThread.start();
+    //         // Put rectangle in the picture.
+    //         Imgproc.rectangle(mat, new Point(100,100), new Point(400, 400), new Scalar(255, 255, 255), 5);
+    //         // Place output stream a new image, now with a picture.
+    //         outputStream.putFrame(mat);
+    //       }
+    //     });
+    //   m_visionThread.setDaemon(true);
+    //   m_visionThread.start();
   }
 
   /**
