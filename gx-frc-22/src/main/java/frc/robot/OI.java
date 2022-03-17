@@ -12,6 +12,12 @@ public class OI {
     private static final int ARM_UP_BUTTON = 5;
     private static final int ARM_DOWN_BUTTON = 6;
 
+    /* Everything with 't' as a comment is used for fine-tuning while testing drive
+     * Will be removed later
+    */
+
+    public double power = 5;
+
     private static OI oi;
     private XboxController gameController;
 
@@ -26,11 +32,19 @@ public class OI {
 
     //return joystick inputs for driving
     public double getThrottleAxis() {
-        return -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
+        double num = -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
+
+        if (num < 0) {
+            double temp = Math.pow(num, power);
+        }
+
+        return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
     }
 
     public double getTurnAxis() {
-        return gameController.getRawAxis(DRIVE_TURN_AXIS);
+        double num = gameController.getRawAxis(DRIVE_TURN_AXIS);
+
+        return Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
     }
 
     //hold intake button to spin balls inward
