@@ -39,7 +39,7 @@ public class Arm extends SubsystemBase {
    
 
     public Arm() {
-        encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 15);
+        encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 3);
 
         controller.setP(kP);
         controller.setI(kI);
@@ -55,7 +55,7 @@ public class Arm extends SubsystemBase {
     }
 
     public double PIDError() {
-      return encoder.getPosition() / 15;
+      return encoder.getPosition() / 3;
     }
 
     @Override
