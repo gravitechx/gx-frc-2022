@@ -4,7 +4,15 @@
 
 package frc.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -16,6 +24,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  private static final int RESOLUTION_X = 1280;
+  private static final int RESOLUTION_Y = 720;    
+
+  // A new thread for the camera.
+  Thread m_visionThread;
+
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -29,7 +44,49 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
+
+    // Simple camera code. This line of code works.
+    // CameraServer.startAutomaticCapture();
+
+    // More complex camera code. Camera code (including above) are from https://docs.wpilib.org/en/stable/docs/software/vision-processing/roborio/using-the-cameraserver-on-the-roborio.html
+    m_visionThread = 
+      new Thread(
+        () -> {
+
+          // Get USB Camera from CameraServer.
+          UsbCamera camera = CameraServer.startAutomaticCapture();
+          // Resolution
+          camera.setResolution(RESOLUTION_X, RESOLUTION_Y);
+
+          // Get a CvSink.
+          CvSink cvSink = CameraServer.getVideo();
+          // Open CvSource, which gives images to the dashboard.
+          CvSource outputStream = CameraServer.putVideo("Rectangle", RESOLUTION_X, RESOLUTION_Y);
+
+          Mat mat = new Mat();
+
+          // This can't be true, as the program will not close if it is. This is meant
+          while (!Thread.interrupted()) {
+
+            // CvSink has to take a frame, put it in source mat.
+
+            // Errors.
+            if (cvSink.grabFrame(mat) == 0) {
+              // Send stream the error.
+              outputStream.notifyError(cvSink.getError());
+
+              // skip current iteration
+              continue;
+            }
+      
+            // Put rectangle in the picture.
+            Imgproc.rectangle(mat, new Point(100,100), new Point(400, 400), new Scalar(255, 255, 255), 5);
+            // Place output stream a new image, now with a picture.
+            outputStream.putFrame(mat);
+          }
+        });
+      m_visionThread.setDaemon(true);
+      m_visionThread.start();
   }
 
   /**
