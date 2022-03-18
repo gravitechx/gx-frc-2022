@@ -25,8 +25,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
 
-  private static final int RESOLUTION_X = 1280;
-  private static final int RESOLUTION_Y = 720;    
+  private static final int RESOLUTION_X = 720;
+  private static final int RESOLUTION_Y = 480;    
 
   // A new thread for the camera.
   Thread m_visionThread;
@@ -46,7 +46,21 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     // Simple camera code. This line of code works.
+    // Resolution: more than 240 is a risk. 480p is the highest we can go.
+
+    // https://docs.wpilib.org/en/stable/docs/software/vision-processing/introduction/cameraserver-class.html
+    // Creates UsbCamera and MkpegServer [1], connects them.
     CameraServer.startAutomaticCapture();
+    // // Creates the CvSink and connects to UsbCamera
+    // CvSink cvSink = CameraServer.getVideo();
+    // // Creates the CvSource and MjpegServer [2] and connects them.
+    // CvSource outputStream = CameraServer.putVideo("Stream", RESOLUTION_X, RESOLUTION_Y);
+
+
+    // We can use CameraServer as the constructor because .startAutomaticCapture returns a UsbCamera?
+    // UsbCamera camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(RESOLUTION_X, RESOLUTION_Y);
+
 
     // More complex camera code. Camera code (including above) are from https://docs.wpilib.org/en/stable/docs/software/vision-processing/roborio/using-the-cameraserver-on-the-roborio.html
     // A lot of lagging.
