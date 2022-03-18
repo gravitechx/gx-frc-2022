@@ -17,11 +17,20 @@ public final class Constants {
     public static final int TALON_L_FOLLOWER_PORT = 1;
     public static final int TALON_R_LEADER_PORT = 2;
     public static final int TALON_R_FOLLOWER_PORT = 5;
-    public static final double PULSE_PER_REVOLUTION = 42.0; 
+
+    public static final int ARM_MOTOR = 4;
+    public static final int BALL_INTAKE_MOTOR = 5;
+
     public static final int CONTROLLER_PORT = 0;
+
+    public static final double PULSE_PER_REVOLUTION = 42.0; 
     public static final double SPIN_SPEED = 0.7;
     public static final double SPIN_SPEED_REVERSE = -0.7;
-    public static final int NEO_ID = 4;
+    
+    
+
+    //distance the arm moves
+    public static final double MOVEMENT_DISTANCE = 100;
     
     
 

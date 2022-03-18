@@ -5,12 +5,12 @@
 package frc.robot.commands;
  
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 
 
-public class ArmUp extends CommandBase {
 
-    private static final double movementDistance = 100;
+public class ArmUp extends CommandBase {
 
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final Arm drivetrain;
@@ -27,7 +27,7 @@ public class ArmUp extends CommandBase {
         addRequirements(drivetrain);
 
         this.tolerance = tolerance;
-        distance = movementDistance;
+        distance = Constants.MOVEMENT_DISTANCE;
 
     }
 

@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
-static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
+static private CANSparkMax leader = new CANSparkMax(Constants.BALL_INTAKE_MOTOR, MotorType.kBrushless);
 
 static BallIntake intake;
 

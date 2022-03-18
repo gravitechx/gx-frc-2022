@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
-    CANSparkMax motor = new CANSparkMax(Constants.NEO_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+    CANSparkMax motor = new CANSparkMax(Constants.ARM_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
 
