@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
   //drivetrain constants
-  public static final double DEADBAND = 0.1;
+  public static final double DEADBAND = 0.05;
   public static final double MAX_OUTPUT = 1.0;
   public static final double VOLT_COMP = 6.0;
   public static final double AMP_LIMIT = 40.0;
