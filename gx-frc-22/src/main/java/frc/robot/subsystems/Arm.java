@@ -66,13 +66,9 @@ public class Arm extends SubsystemBase {
 
     public void setrotations(double rotations) {
       motor.set(pid.calculate(encoder.getPosition(), rotations));}
-    
 
     public void PID(double distance) {
       controller.setReference(distance, ControlType.kPosition);
-
-
-
     }
 
     public double PIDError() {
@@ -89,11 +85,16 @@ public class Arm extends SubsystemBase {
     double rotations = SmartDashboard.getNumber("Set Rotations", 0);
     
     //if PID coeffeicnts on SmartDashboard have changed, write ne values to controller 
-    if((p != kP)) {controller.setP(p); kP=p;}
-    if((i != kI)) {controller.setP(i); kI=i;}
-    if((d != kD)) {controller.setD(d); kD=d;}
-    if((iz != kIZone)) {controller.setIZone(iz); kIZone=p;}
-    if((p != kP)) {controller.setP(p); kP=p;}
+    if((p != kP)){
+    controller.setP(p); kP=p;}
+    if((i != kI)) {
+      controller.setP(i); kI=i;}
+    if((d != kD)) {
+      controller.setD(d); kD=d;}
+    if((iz != kIZone)) {
+      controller.setIZone(iz); kIZone=p;}
+    if((p != kP)) {
+      controller.setP(p); kP=p;}
 
     
     controller.setReference(rotations, CANSparkMax.ControlType.kPosition);

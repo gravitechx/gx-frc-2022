@@ -65,12 +65,8 @@ public class IntakeArm extends SubsystemBase {
     armLeader.getEncoder().setPosition(0);
     turnController.reset();
     turnController.setPID(Kp, Ki, Kd);
-    // sets the values again, we have this above, but putting it here again just in
-    // case
+    // sets the values again, we have this above, but putting it here again just in case
     turnController.setSetpoint(rotation);
-    // turnController.start
-    // turns on the controller
-
   }
   // the amount (in degrees) that we want the motor to rotate(the length we want
   // the arm to go up/down)

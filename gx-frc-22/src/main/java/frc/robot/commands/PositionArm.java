@@ -27,8 +27,7 @@ public class PositionArm extends CommandBase {
   public void execute() {
     IntakeArm.getInstance().Spin(speed);
       //if(OI.getInstance().ArmUpButton())
-      //((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
-      // Added cast to method reciever thing, dont treally know what it does, but fixes error!
+      //(IntakeArm.getInstance()).rotateDegrees(0);
     }
   
 

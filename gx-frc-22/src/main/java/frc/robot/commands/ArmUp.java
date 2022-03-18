@@ -26,18 +26,15 @@ public class ArmUp extends CommandBase {
         drivetrain = Arm.getInstance();
         addRequirements(drivetrain);
         
-        
-
         this.tolerance = tolerance;
         distance = Constants.MOVEMENT_DISTANCE;
-
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         drivetrain.ZeroArmEncoder();
-       // drivetrain.resetPositionPID();
+         //drivetrain.resetPositionPID();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
