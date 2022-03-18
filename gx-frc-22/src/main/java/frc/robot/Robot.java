@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.Drive;
-
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -46,6 +47,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new Drive(DriveTrain.getInstance()));
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(360, 240);
   }
 
   /**

@@ -35,7 +35,7 @@ public class OI {
         double num = -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
 
         if (num < 0) {
-            double temp = Math.pow(num, power);
+            double temp = Math.pow(num, power);//
         }
 
         return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
