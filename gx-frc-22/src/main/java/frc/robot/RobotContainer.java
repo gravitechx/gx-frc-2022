@@ -46,10 +46,10 @@ public class RobotContainer {
     JoystickButton test = new JoystickButton(OI.getInstance().getController(), 5);
 
 
-    intakeIn.whenHeld(new PositionArm(0.07));
-    intakeOut.whenHeld(new PositionArm(-0.07));
-    armUp.whenPressed(new ArmUp(10, 500000));
-    armDown.whenPressed(new ArmUp(-10, 500000));
+    intakeIn.whileHeld(new PositionArm(0.07));
+    intakeOut.whileHeld(new PositionArm(-0.07));
+    armUp.whenPressed(new ArmUp(10, 0));
+    armDown.whenPressed(new ArmUp(-10, 0));
     test.whenPressed(new Test());
   }
 

@@ -21,7 +21,7 @@ public final class Constants {
     public static final int CONTROLLER_PORT = 0;
     public static final double SPIN_SPEED = 0.7;
     public static final double SPIN_SPEED_REVERSE = -0.7;
-    public static final int NEO_ID = 4;
+    public static final int ARM_NEO_ID = 4;
     
     
 

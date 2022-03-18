@@ -25,6 +25,8 @@ public class ArmUp extends CommandBase {
     public ArmUp(double distance, double tolerance) {
         drivetrain = Arm.getInstance();
         addRequirements(drivetrain);
+        
+        
 
         this.tolerance = tolerance;
         distance = movementDistance;

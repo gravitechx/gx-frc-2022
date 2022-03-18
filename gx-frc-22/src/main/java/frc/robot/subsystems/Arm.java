@@ -15,57 +15,92 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
+
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
-    CANSparkMax motor = new CANSparkMax(Constants.NEO_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
+    CANSparkMax motor = new CANSparkMax(Constants.ARM_NEO_ID, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
+    
 
     // Gains
-    double kP = 0.021;
-    double kI = 0.0001;
-    double kD = 0.01;
-    double kF = 0.0472;
-    double kIZone = 0.04;
+     private static double kP = 0;
+     private static double kI = 0;
+     private static double kD = 0;
+     private static double kF = 0;
+     private static double kIZone = 0;
 
     private static Arm arm;
 
     SparkMaxPIDController controller = motor.getPIDController();
     PIDController pid = new PIDController(kP, kI, kD);
+    
 
     public Arm() {
-      encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION / 3);
-
+      motor.restoreFactoryDefaults();
+      encoder.setPositionConversionFactor(Constants.PULSE_PER_REVOLUTION);
+      motor.setSmartCurrentLimit(40);
+      SparkMaxPIDController controller = motor.getPIDController();
+      
       controller.setP(kP);
       controller.setI(kI);
       controller.setD(kD);
       controller.setFF(kF);
       controller.setIZone(kIZone);
 
-      controller.setOutputRange(-1, 1);
+      controller.setOutputRange(-0.5, 0.5);
+      
+      
+      SmartDashboard.putNumber("P Gain", kP);
+      SmartDashboard.putNumber("I Gain", kI);
+      SmartDashboard.putNumber("D Gain", kD);
+      SmartDashboard.putNumber("I Zone", kIZone);
+      SmartDashboard.putNumber("encoder position",0);
     }
 
-    public void test(double distance) {
-      motor.set(pid.calculate(encoder.getPosition(), distance));
-    }
+    public void setrotations(double rotations) {
+      motor.set(pid.calculate(encoder.getPosition(), rotations));}
+    
 
     public void PID(double distance) {
       controller.setReference(distance, ControlType.kPosition);
+
+
+
     }
 
     public double PIDError() {
-      return encoder.getPosition() / 3;
+      return encoder.getPosition();
     }
 
     @Override
     public void periodic() {
+      //read PID coefficeints from SmartDashboard 
+    double p = SmartDashboard.getNumber("P Gain", 0);
+    double i = SmartDashboard.getNumber("I Gain", 0);
+    double d = SmartDashboard.getNumber("D Gain", 0);
+    double iz = SmartDashboard.getNumber("I zone", 0);
+    double rotations = SmartDashboard.getNumber("Set Rotations", 0);
     
+    //if PID coeffeicnts on SmartDashboard have changed, write ne values to controller 
+    if((p != kP)) {controller.setP(p); kP=p;}
+    if((i != kI)) {controller.setP(i); kI=i;}
+    if((d != kD)) {controller.setD(d); kD=d;}
+    if((iz != kIZone)) {controller.setIZone(iz); kIZone=p;}
+    if((p != kP)) {controller.setP(p); kP=p;}
+
+    
+    controller.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    
+    SmartDashboard.putNumber("ProcessVariable", encoder.getPosition());
+    SmartDashboard.putNumber("SetPoint", rotations);
+
     }
 
     public CANSparkMax getMotor(){
