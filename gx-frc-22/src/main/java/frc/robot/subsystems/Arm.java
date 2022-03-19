@@ -100,6 +100,7 @@ public class Arm extends SubsystemBase {
     
     SmartDashboard.putNumber("ProcessVariable", encoder.getPosition());
     SmartDashboard.putNumber("SetPoint", rotations);
+    
 
     }
 

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
@@ -15,6 +16,7 @@ public class PIDTuner extends CommandBase {
 
     private double rotation;
     private double distance;
+    private double encoder;
 
     /*
      * @param subsystem The subsystem used by this command.
@@ -31,11 +33,15 @@ public class PIDTuner extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {SmartDashboard.putNumber("encoder position",0);}
+  public void initialize(){}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    SmartDashboard.putNumber("SetPoint", rotation);
+    SmartDashboard.putNumber("ProcessVariable", encoder);
+  
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -47,3 +53,5 @@ public class PIDTuner extends CommandBase {
     return false;
   }
 }
+
+
