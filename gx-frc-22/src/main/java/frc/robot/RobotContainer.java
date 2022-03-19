@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArmUp;
-import frc.robot.commands.PositionArm;
+import frc.robot.commands.SpinningStickIn;
+import frc.robot.commands.SpinningStickOut;
 import frc.robot.commands.Test;
 
 /**
@@ -46,8 +47,8 @@ public class RobotContainer {
     JoystickButton test = new JoystickButton(OI.getInstance().getController(), 5);
 
 
-    intakeIn.whileHeld(new PositionArm(0.07));
-    intakeOut.whileHeld(new PositionArm(-0.07));
+    intakeIn.whileHeld(new SpinningStickIn());
+    intakeOut.whileHeld(new SpinningStickOut());
     armUp.whenPressed(new ArmUp(10, 0));
     armDown.whenPressed(new ArmUp(-10, 0));
     test.whenPressed(new Test());

@@ -13,7 +13,7 @@ import frc.robot.subsystems.Arm;
 public class ArmUp extends CommandBase {
 
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final Arm drivetrain;
+    private final Arm arm;
 
     private double tolerance;
     private double distance;
@@ -23,8 +23,8 @@ public class ArmUp extends CommandBase {
      */
 
     public ArmUp(double distance, double tolerance) {
-        drivetrain = Arm.getInstance();
-        addRequirements(drivetrain);
+        arm = Arm.getInstance();
+        addRequirements(arm);
         
         
 
@@ -36,26 +36,26 @@ public class ArmUp extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        drivetrain.ZeroArmEncoder();
+        // arm.ZeroArmEncoder();
        // drivetrain.resetPositionPID();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drivetrain.PID(distance);
+        arm.PID(distance);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        drivetrain.getMotor().set(0);
+        arm.getMotor().set(0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        double uperror = drivetrain.PIDError();
+        double uperror = arm.PIDError();
         if (Math.abs(uperror) < tolerance) { // if the controller is within the tolerance
             return true;
         }
