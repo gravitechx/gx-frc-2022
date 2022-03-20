@@ -18,6 +18,7 @@ public class OI {
     //create instance of gamepad
     private OI () {
         gameController = new XboxController(Constants.CONTROLLER_PORT);
+    
     }
 
     public XboxController getController() {

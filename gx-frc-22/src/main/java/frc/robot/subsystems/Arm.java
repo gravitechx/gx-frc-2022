@@ -25,20 +25,18 @@ public class Arm extends SubsystemBase {
     
 
     // Gains
-     private static double kP = 0.9/13.5;
+     private static double kP = 0.03;
      private static double kI = 0;
      private static double kD = 0;
      private static double kF = 0;
      private static double kIZone = 0;
-     public static double ARM_MAX = 13.5;
-     public static double ARM_UP = 12.952;
+     public static double ARM_MAX = 41.5;
+     public static double ARM_UP = 37.4;
      public static double ARM_DOWN = 0.04;
 
     private static Arm arm;
 
-    SparkMaxPIDController controller = motor.getPIDController();
-    PIDController pid = new PIDController(kP, kI, kD);
-    
+    SparkMaxPIDController controller = motor.getPIDController();    
 
     public Arm() {
       motor.restoreFactoryDefaults();
@@ -64,17 +62,13 @@ public class Arm extends SubsystemBase {
     }
 
     public void setrotations(double rotations) {
-      motor.set(pid.calculate(encoder.getPosition(), rotations));}
+    controller.setReference(rotations, CANSparkMax.ControlType.kPosition);
+
+  
+    }
     
 
-    public void PID(double distance) {
-      controller.setReference(distance, ControlType.kPosition, 0, 0.2);
-
-
-
-    }
-
-    public double PIDError() {
+    public double getencoderposition () {
       return encoder.getPosition();
     }
 
@@ -95,8 +89,6 @@ public class Arm extends SubsystemBase {
     if((p != kP)) {controller.setP(p); kP=p;}
 
     
-    controller.setReference(rotations, CANSparkMax.ControlType.kPosition);
-
     SmartDashboard.putNumber("encoder position",encoder.getPosition());
     SmartDashboard.putNumber("SetPoint", rotations);
     
@@ -107,9 +99,7 @@ public class Arm extends SubsystemBase {
       return motor;
     }
 
-    public PIDController getController() {
-      return pid;
-    }
+  
 
     public void ZeroArmEncoder() {
       encoder.setPosition(0);

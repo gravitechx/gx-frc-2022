@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
-import frc.robot.commands.Test;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -42,16 +41,14 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 0);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
-    JoystickButton test = new JoystickButton(OI.getInstance().getController(), 5);
 
 
     intakeIn.whileHeld(new SpinningStickIn());
     intakeOut.whileHeld(new SpinningStickOut());
-    armUp.whenPressed(new ArmUp(10, 0));
-    armDown.whenPressed(new ArmUp(-10, 0));
-    test.whenPressed(new Test());
+    armUp.whenPressed(new ArmUp(0.07, 0.01));
+    armDown.whenPressed(new ArmUp(0, 0.01));
   }
 
   /**
