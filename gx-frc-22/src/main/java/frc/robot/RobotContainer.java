@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 //import frc.robot.commands.SpinningStickOut;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ArmUp;
+import frc.robot.commands.SpinArm;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
 
@@ -44,11 +44,10 @@ public class RobotContainer {
     JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
 
-
     intakeIn.whileHeld(new SpinningStickIn());
     intakeOut.whileHeld(new SpinningStickOut());
-    armUp.whenPressed(new ArmUp(0.07, 0.01));
-    armDown.whenPressed(new ArmUp(0, 0.01));
+    armUp.whileHeld(new SpinArm(0.4));
+    armDown.whileHeld(new SpinArm(-0.1));
   }
 
   /**
