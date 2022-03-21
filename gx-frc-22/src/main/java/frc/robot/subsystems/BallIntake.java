@@ -38,7 +38,10 @@ static BallIntake intake;
     leader.set(Constants.SPIN_SPEED_REVERSE);
   }
 
-  
+  public void setSpeed(double speed)
+  {
+    leader.set(speed);
+  }
 
   // Singleton - makes only one instance of BallIntake
   public static BallIntake getInstance(){
