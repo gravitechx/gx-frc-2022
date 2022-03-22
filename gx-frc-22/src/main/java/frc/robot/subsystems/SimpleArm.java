@@ -5,21 +5,46 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class SimpleArm extends SubsystemBase {
   CANSparkMax motor = new CANSparkMax(Constants.ARM_NEO_ID, MotorType.kBrushless);
+  RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
+
   private static SimpleArm arm;
 
+  public static float ARM_MAX = 40;
+  public static double ARM_UP = 37.4;
+  public static double ARM_DOWN = 0.04;
+
+
+  
+  
   /** Creates a new SimpleArm. */
-  public SimpleArm() {}
+  public SimpleArm() {
+
+    // set the soft limit.
+    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
+    SmartDashboard.putNumber("encoder position",encoder.getPosition());
+  }
+  
+    public double getencoderposition () {
+      return encoder.getPosition();
+
+
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("encoder position", encoder.getPosition());
+
   }
 
   public void spinArm(double speed) {
@@ -39,4 +64,9 @@ public class SimpleArm extends SubsystemBase {
     if (arm == null) arm = new SimpleArm();
     return arm;
   }
+
+   {
+    
+  }
+
 }

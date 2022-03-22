@@ -6,14 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Arm;
 
 public class Test extends CommandBase {
   /** Creates a new Test. */
   public Test() {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(Arm.getInstance());
+  
   }
 
   // Called when the command is initially scheduled.

@@ -55,8 +55,8 @@ public class RobotContainer {
 
     intakeIn.whileHeld(new SpinningStickIn());
     intakeOut.whileHeld(new SpinningStickOut());
-    armUp.whileHeld(new SpinArm(0.4));
-    armDown.whileHeld(new SpinArm(-0.1));
+    armUp.whileHeld(new SpinArm(0.05));
+    armDown.whileHeld(new SpinArm(-0.05));
 
     /*
     intakeIn.whenHeld(new PositionArm(0.07));
@@ -76,3 +76,5 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return autoCommand;
   }
+
+}
