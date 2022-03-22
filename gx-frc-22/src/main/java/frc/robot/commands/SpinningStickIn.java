@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.BallIntake;
 
 
@@ -12,10 +13,12 @@ public class SpinningStickIn extends CommandBase {
 
   int value = 0;
 
+  BallIntake ballIntake;
   /** Creates a new SpinningStick. */
-  public SpinningStickIn() {
+  public SpinningStickIn(BallIntake subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(BallIntake.getInstance());
+    ballIntake = subsystem;
+    addRequirements(ballIntake);
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +28,7 @@ public class SpinningStickIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallIntake.getInstance().ballIn();
+    BallIntake.getInstance().setSpeed(Constants.SPIN_SPEED);
   }
 
   // Called once the command ends or is interrupted.

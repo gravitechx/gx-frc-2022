@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 //import frc.robot.commands.SpinningStickOut;
 //import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.SpinArm;
+import frc.robot.commands.MoveArm;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
 
@@ -20,7 +20,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.Drive;
+import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.SimpleArm;
 import frc.robot.commands.AutoTest;
 
 /**
@@ -29,10 +31,12 @@ import frc.robot.commands.AutoTest;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain autoSubsystem = DriveTrain.getInstance();
-
+  private final SimpleArm arm = SimpleArm.getInstance();
+  private final BallIntake ballIntake = BallIntake.getInstance();
   private final AutoTest autoCommand = new AutoTest();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -50,21 +54,14 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
-    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 2);
+    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 4);
 
-    intakeIn.whileHeld(new SpinningStickIn());
-    intakeOut.whileHeld(new SpinningStickOut());
-    armUp.whileHeld(new SpinArm(0.05));
-    armDown.whileHeld(new SpinArm(-0.05));
-
-    /*
-    intakeIn.whenHeld(new PositionArm(0.07));
-    intakeOut.whenHeld(new PositionArm(-0.07));
-    armUp.whenPressed(new ArmUp(10, 500000));
-    armDown.whenPressed(new ArmUp(-10, 500000));
-    test.whenPressed(new Test());
-    */
+    intakeIn.whileHeld(new SpinningStickIn(ballIntake));
+    intakeOut.whileHeld(new SpinningStickOut(ballIntake));
+    // Constant.
+    armUp.whileHeld(new MoveArm(arm, 0.2));
+    armDown.whileHeld(new MoveArm(arm, -0.05));
   }
 
   /**

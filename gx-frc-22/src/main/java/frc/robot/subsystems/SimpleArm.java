@@ -23,21 +23,13 @@ public class SimpleArm extends SubsystemBase {
   public static double ARM_UP = 37.4;
   public static double ARM_DOWN = 0.04;
 
-
-  
   
   /** Creates a new SimpleArm. */
   public SimpleArm() {
 
     // set the soft limit.
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
-    SmartDashboard.putNumber("encoder position",encoder.getPosition());
-  }
-  
-    public double getencoderposition () {
-      return encoder.getPosition();
-
-
+    SmartDashboard.putNumber("encoder position", encoder.getPosition());
   }
 
   @Override
