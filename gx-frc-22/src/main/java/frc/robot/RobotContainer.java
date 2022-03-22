@@ -6,13 +6,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+
 //import frc.robot.commands.SpinningStickIn;
 //import frc.robot.commands.SpinningStickOut;
 //import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.SpinArm;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
+
+import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.robot.commands.Drive;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.AutoTest;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,9 +31,9 @@ import frc.robot.commands.SpinningStickOut;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final DriveTrain autoSubsystem = DriveTrain.getInstance();
 
-  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final AutoTest autoCommand = new AutoTest();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -48,6 +57,14 @@ public class RobotContainer {
     intakeOut.whileHeld(new SpinningStickOut());
     armUp.whileHeld(new SpinArm(0.4));
     armDown.whileHeld(new SpinArm(-0.1));
+
+    /*
+    intakeIn.whenHeld(new PositionArm(0.07));
+    intakeOut.whenHeld(new PositionArm(-0.07));
+    armUp.whenPressed(new ArmUp(10, 500000));
+    armDown.whenPressed(new ArmUp(-10, 500000));
+    test.whenPressed(new Test());
+    */
   }
 
   /**
@@ -55,8 +72,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*public Command getAutonomousCommand() {
+  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-    */
+    return autoCommand;
   }

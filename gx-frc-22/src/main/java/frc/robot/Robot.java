@@ -5,13 +5,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Arm;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
-
 
 /*import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -23,6 +23,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 */
+
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.Drive;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.Joystick;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+// import edu.wpi.first.wpilibj.Joystick;
+import edu. wpi.first.wpilibj.motorcontrol.PWMTalonFX;
+// import edu.wpi.first.wpilibj.TimedRobot;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 //import com.revrobotics.CANSparkMax
 /**
@@ -47,9 +63,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     Arm.getInstance().ZeroArmEncoder();
     //CameraServer.startAutomaticCapture();
-    
-
-
+  
+    CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new Drive(DriveTrain.getInstance()));
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(360, 240);
   }
 
   /**
@@ -67,6 +84,8 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     
+    SmartDashboard.putNumber("Right Leader", DriveTrain.getInstance().getRLeader().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Left Leader", DriveTrain.getInstance().getLLeader().getSelectedSensorPosition());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -105,7 +124,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void testInit() {

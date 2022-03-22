@@ -4,18 +4,24 @@
 
 package frc.robot.commands;
 
+import frc.robot.OI;
+import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
 
 
-public class SpinningStickIn extends CommandBase {
+/** An example command that uses an example subsystem. */
+public class Drive extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-  int value = 0;
+  // Drivetrain Subsystem
+  private final DriveTrain drivetrain;
 
-  /** Creates a new SpinningStick. */
-  public SpinningStickIn() {
+   /* @param subsystem The subsystem used by this command.
+   */
+  public Drive(DriveTrain subsystem) {
+    drivetrain = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(BallIntake.getInstance());
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,15 +31,17 @@ public class SpinningStickIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallIntake.getInstance().ballIn();
+    //get values from joysticks
+    double valueY = OI.getInstance().getThrottleAxis();
+    double valueX = OI.getInstance().getTurnAxis();
+
+    //use built in method for arcade drive
+    drivetrain.arcadeDrive(valueY, valueX);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-
-  public void end(boolean interrupted) {
-    BallIntake.getInstance().setSpeed(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

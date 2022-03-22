@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
     //define which button or joystick is used here 
     private static final int DRIVE_THROTTLE_AXIS = 1;
+  
     private static final int DRIVE_TURN_AXIS = 2;
     //buttons below are PLACEHOLDERS
     private static final int BALL_INTAKE_BUTTON = 4;
@@ -12,13 +13,18 @@ public class OI {
     private static final int ARM_UP_BUTTON = 0;
     private static final int ARM_DOWN_BUTTON = 6;
 
+    /* Everything with 't' as a comment is used for fine-tuning while testing drive
+     * Will be removed later
+    */
+
+    public double power = 5;
+
     private static OI oi;
     private XboxController gameController;
 
     //create instance of gamepad
     private OI () {
         gameController = new XboxController(Constants.CONTROLLER_PORT);
-    
     }
 
     public XboxController getController() {
@@ -27,11 +33,19 @@ public class OI {
 
     //return joystick inputs for driving
     public double getThrottleAxis() {
-        return -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
+        double num = -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
+
+        if (num < 0) {
+            double temp = Math.pow(num, power);//
+        }
+
+        return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
     }
 
     public double getTurnAxis() {
-        return gameController.getRawAxis(DRIVE_TURN_AXIS);
+        double num = gameController.getRawAxis(DRIVE_TURN_AXIS);
+
+        return Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
     }
 
     //hold intake button to spin balls inward
@@ -43,6 +57,7 @@ public class OI {
     public boolean getOuttakeButton() {
         return gameController.getRawButton(BALL_OUTTAKE_BUTTON);
     }
+
 
     //press button once to fully raise or lower arm
     public boolean ArmUpButton() {
@@ -62,7 +77,7 @@ public class OI {
         if (oi == null) oi = new OI();
         return oi;
     }
-
+  
     public boolean getArmUpButton() {
         return false;
     }
