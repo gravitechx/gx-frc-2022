@@ -6,6 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+
+//import frc.robot.commands.SpinningStickIn;
+//import frc.robot.commands.SpinningStickOut;
+//import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.SpinArm;
+import frc.robot.commands.SpinningStickIn;
+import frc.robot.commands.SpinningStickOut;
+
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -41,9 +50,13 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
     JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 0);
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 6);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 2);
-    JoystickButton test = new JoystickButton(OI.getInstance().getController(), 5);
+
+    intakeIn.whileHeld(new SpinningStickIn());
+    intakeOut.whileHeld(new SpinningStickOut());
+    armUp.whileHeld(new SpinArm(0.4));
+    armDown.whileHeld(new SpinArm(-0.1));
 
     /*
     intakeIn.whenHeld(new PositionArm(0.07));
@@ -63,4 +76,3 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return autoCommand;
   }
-}

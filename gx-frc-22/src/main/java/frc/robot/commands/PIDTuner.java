@@ -4,36 +4,40 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.Arm;
 
 
-public class SpinningStickIn extends CommandBase {
+public class PIDTuner extends CommandBase {
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
+    private final Arm drivetrain;
 
-  int value = 0;
+    private double rotation;
+    private double distance;
 
-  /** Creates a new SpinningStick. */
-  public SpinningStickIn() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(BallIntake.getInstance());
+    /*
+     * @param subsystem The subsystem used by this command.
+     */
+
+    public PIDTuner(double rotation) {
+        drivetrain = Arm.getInstance();
+        addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {SmartDashboard.putNumber("encoder position",0);}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallIntake.getInstance().ballIn();
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-
-  public void end(boolean interrupted) {
-    BallIntake.getInstance().setSpeed(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

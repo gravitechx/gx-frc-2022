@@ -5,17 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
+//import frc.robot.subsystems.IntakeArm;
+//import frc.robot.OI;
 
-
-public class SpinningStickIn extends CommandBase {
-
-  int value = 0;
-
-  /** Creates a new SpinningStick. */
-  public SpinningStickIn() {
+public class ResetArm extends CommandBase {
+  /** Creates a new ResetArm. */
+  public ResetArm() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(BallIntake.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -25,15 +21,15 @@ public class SpinningStickIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    BallIntake.getInstance().ballIn();
+
+    //if (((Object) OI.getInstance()).ArmDownButton())
+      //((IntakeArm) IntakeArm.getInstance()).rotateDegrees(0);
+      //Added cast to method reciever thing, dont treally know what it does, but fixes error!
   }
 
   // Called once the command ends or is interrupted.
   @Override
-
-  public void end(boolean interrupted) {
-    BallIntake.getInstance().setSpeed(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

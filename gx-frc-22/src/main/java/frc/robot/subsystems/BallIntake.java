@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 //import com.revrobotics.CANEncoder;
@@ -8,10 +9,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
-static private CANSparkMax leader = new CANSparkMax(5, MotorType.kBrushless);
+static private CANSparkMax leader = new CANSparkMax(Constants.BALL_INTAKE_MOTOR, MotorType.kBrushless);
 
 static BallIntake intake;
 
@@ -21,20 +23,26 @@ static BallIntake intake;
 
   }
 
-  //REMINDER: Add speeds to constants (ask edwin)
-
   //Starts sucking in balls
-  public void ballIn() {
-    leader.set(0.7);
+  public void ballIn()
+  {
+    leader.set(Constants.SPIN_SPEED);
   }
 
+
   //Starts shooting out balls
-  public void ballOut() {
-    leader.set(-0.7);
+  public void ballOut()
+  {
+    leader.set(Constants.SPIN_SPEED_REVERSE);
+  }
+
+  public void setSpeed(double speed)
+  {
+    leader.set(speed);
   }
 
   // Singleton - makes only one instance of BallIntake
-  public static BallIntake getInstance() {
+  public static BallIntake getInstance(){
     if(intake == null)
     {
       intake = new BallIntake();
