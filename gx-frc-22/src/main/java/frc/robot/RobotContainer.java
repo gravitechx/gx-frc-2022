@@ -15,11 +15,9 @@ import frc.robot.commands.MoveArm;
 import frc.robot.commands.SpinningStickIn;
 import frc.robot.commands.SpinningStickOut;
 
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.commands.Drive;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SimpleArm;
