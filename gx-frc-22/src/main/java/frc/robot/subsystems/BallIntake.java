@@ -43,6 +43,8 @@ static BallIntake intake;
     while(System.currentTimeMillis() < end) {
       leader.set(speed);
     }
+
+    leader.set(0);
   }
 
   // Singleton - makes only one instance of BallIntake
