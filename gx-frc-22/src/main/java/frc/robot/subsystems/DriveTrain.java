@@ -174,20 +174,13 @@ public class DriveTrain extends SubsystemBase {
     drivetrain.arcadeDrive(throttle, turn, false);
   }
 
-  public void autoDrive(long time) {
-    //amount = 0;
-    long t = System.currentTimeMillis();
-    long end = t + time;
+  public void autoDrive(double throttle, double turn, long time) {
+    long start = System.currentTimeMillis();
+    long end = start + time;
 
     while(System.currentTimeMillis() < end) {
       SmartDashboard.putNumber("Amount", amount++);
-      arcadeDrive(0.5, 0);
-
-      /*try {
-        Thread.sleep(99L);
-      } catch (InterruptedException e) {
-        
-      }*/
+      arcadeDrive(throttle, turn);
     }
   }
 

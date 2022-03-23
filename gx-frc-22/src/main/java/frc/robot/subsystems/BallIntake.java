@@ -3,14 +3,10 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 //import com.revrobotics.CANEncoder;
 // Person of unkown identity(***redacted***) had name idea
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,15 +21,10 @@ static BallIntake intake;
     // This method will be called once per scheduler run
 
   }
-
-  //Starts sucking in balls
   public void ballIn()
   {
     leader.set(Constants.SPIN_SPEED);
   }
-
-
-  //Starts shooting out balls
   public void ballOut()
   {
     leader.set(Constants.SPIN_SPEED_REVERSE);
@@ -42,6 +33,16 @@ static BallIntake intake;
   public void setSpeed(double speed)
   {
     leader.set(speed);
+  }
+
+  // amazing time logic for auto
+  public void autoSpin(double speed, long time) {
+    long start = System.currentTimeMillis();
+    long end = start + time;
+
+    while(System.currentTimeMillis() < end) {
+      leader.set(speed);
+    }
   }
 
   // Singleton - makes only one instance of BallIntake
@@ -53,8 +54,5 @@ static BallIntake intake;
 
     return intake;
   }
-
-  
-
-  }
+}
 

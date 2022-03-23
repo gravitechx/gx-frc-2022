@@ -20,7 +20,6 @@ public class Drive extends CommandBase {
    */
   public Drive(DriveTrain subsystem) {
     drivetrain = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
     // place drivetrain here? https://www.chiefdelphi.com/t/how-to-program-autonomous-in-new-command-based-format/378450
     addRequirements(subsystem);
   }

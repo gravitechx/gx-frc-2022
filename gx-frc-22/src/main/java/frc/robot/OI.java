@@ -33,43 +33,12 @@ public class OI {
 
     //return joystick inputs for driving
     public double getThrottleAxis() {
-        double num = -gameController.getRawAxis(DRIVE_THROTTLE_AXIS);
-
-        if (num < 0) {
-            double temp = Math.pow(num, power);//
-        }
-
         return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
     }
 
     public double getTurnAxis() {
-        double num = gameController.getRawAxis(DRIVE_TURN_AXIS);
-
         return Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
     }
-
-    //hold intake button to spin balls inward
-    public boolean getIntakeButton() {
-        return gameController.getRawButton(BALL_INTAKE_BUTTON);
-    }
-
-    //hold outtake button to spin balls outward
-    public boolean getOuttakeButton() {
-        return gameController.getRawButton(BALL_OUTTAKE_BUTTON);
-    }
-
-
-    //press button once to fully raise or lower arm
-    public boolean ArmUpButton() {
-        return gameController.getRawButtonPressed(ARM_UP_BUTTON);
-    }
-
-    public boolean ArmDownButton() {
-        return gameController.getRawButtonPressed(ARM_DOWN_BUTTON);
-    }
-
-    //add your button and methods of those buttons here, define your buttons up top
-
     /* Singleton: if you call OI object, this methos will use an object that already exists,
     and if none exists it will create a new instance of the object. Now you can say "getInstance"
     instead of creating a new instance every time you need one */

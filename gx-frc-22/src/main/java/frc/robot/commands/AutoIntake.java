@@ -4,36 +4,36 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.BallIntake;
 
-import frc.robot.subsystems.DriveTrain;
+public class AutoIntake extends CommandBase {
+  private double speed;
+  private long time;
 
-public class AutoTest extends CommandBase {
-  /** Creates a new AutoTest. */
-  public AutoTest() {
+  /** Creates a new AutoIntake. */
+  public AutoIntake(double speed, long time) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(DriveTrain.getInstance());
+
+    addRequirements(BallIntake.getInstance());
+
+    this.speed = speed;
+    this.time = time;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    SmartDashboard.putBoolean("Finished", false);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getInstance().autoDrive(2000L); // Time is in MS
+    BallIntake.getInstance().autoSpin(speed, time);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("Finished", true);
-    //DriveTrain.getInstance().stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

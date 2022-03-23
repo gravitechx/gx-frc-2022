@@ -9,11 +9,6 @@
 // import frc.robot.subsystems.DriveTrain;
 
 // public class Auto extends CommandBase {
-//   /** Creates a new Auto. */
-//   // Declare a drivetrain.
-//   DriveTrain driveTrain;
-//   // Declare a timer.
-//   Timer timer;
 
 //   public Auto(DriveTrain subsystem) {
 //     // Use addRequirements() here to declare subsystem dependencies.

@@ -56,9 +56,4 @@ public class SimpleArm extends SubsystemBase {
     if (arm == null) arm = new SimpleArm();
     return arm;
   }
-
-   {
-    
-  }
-
 }

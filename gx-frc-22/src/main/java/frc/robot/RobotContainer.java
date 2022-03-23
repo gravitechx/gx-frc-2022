@@ -21,7 +21,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SimpleArm;
-import frc.robot.commands.AutoTest;
+import frc.robot.commands.AutoDrive;
+import frc.robot.commands.AutoGroup;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,7 +36,7 @@ public class RobotContainer {
   private final DriveTrain autoSubsystem = DriveTrain.getInstance();
   private final SimpleArm arm = SimpleArm.getInstance();
   private final BallIntake ballIntake = BallIntake.getInstance();
-  private final AutoTest autoCommand = new AutoTest();
+  private final AutoGroup autoCommand = new AutoGroup();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -50,15 +51,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 1);
-    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 3);
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 2);
-    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 4);
+    JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 6);
+    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 4); // 4 = Y, 3 = X can be changed
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 5);
+    JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 1);
 
     intakeIn.whileHeld(new SpinningStickIn(ballIntake));
     intakeOut.whileHeld(new SpinningStickOut(ballIntake));
-    // Constant.
-    armUp.whileHeld(new MoveArm(arm, 0.2));
+
+    armUp.whileHeld(new MoveArm(arm, 0.35));
     armDown.whileHeld(new MoveArm(arm, -0.05));
   }
 
