@@ -12,9 +12,13 @@ import frc.robot.Constants;
 
   /** Creates a new Ball_Intake. */
 public class BallIntake extends SubsystemBase {
-static private CANSparkMax leader = new CANSparkMax(Constants.BALL_INTAKE_MOTOR, MotorType.kBrushless);
+  static private CANSparkMax leader = new CANSparkMax(Constants.BALL_INTAKE_MOTOR, MotorType.kBrushless);
+  static BallIntake intake;
 
-static BallIntake intake;
+  public BallIntake() {
+    // Set a current limit of 30 amps.
+    leader.setSmartCurrentLimit(Constants.INTAKE_CURRENT_LIMIT);
+  }
 
   @Override
   public void periodic() {

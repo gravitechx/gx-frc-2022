@@ -19,9 +19,9 @@ public class SimpleArm extends SubsystemBase {
 
   private static SimpleArm arm;
 
-  public static float ARM_MAX = 40;
-  public static double ARM_UP = 37.4;
-  public static double ARM_DOWN = 0.04;
+  public static float ARM_MAX = 0.0f;
+  public static double ARM_UP = 0;
+  public static float ARM_DOWN = -37.4f;
 
   
   /** Creates a new SimpleArm. */
@@ -29,6 +29,7 @@ public class SimpleArm extends SubsystemBase {
 
     // set the soft limit.
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
+    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ARM_DOWN);
     SmartDashboard.putNumber("encoder position", encoder.getPosition());
   }
 
@@ -50,6 +51,17 @@ public class SimpleArm extends SubsystemBase {
     while(System.currentTimeMillis() < end) {
       motor.set(speed);
     }
+  }
+
+  // Set the soft limit
+  public void enableSoftLimit(boolean enabled) {
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);
+  }
+
+  // Zero Arm Encoder
+  public void zeroArmEncoder() {
+    encoder.setPosition(0);
   }
 
   public static SimpleArm getInstance() {

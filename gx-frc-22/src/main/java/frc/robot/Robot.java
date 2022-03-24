@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 */
 
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.SimpleArm;
 import frc.robot.commands.Drive;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -64,6 +65,14 @@ public class Robot extends TimedRobot {
   
     CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new Drive(DriveTrain.getInstance()));
     UsbCamera camera = CameraServer.startAutomaticCapture();
+
+    // We need a soft limit for robotInit and autoInit
+    // enable soft limit for both up and down. Zero the arm encoder.
+    SimpleArm.getInstance().enableSoftLimit(true);
+    SimpleArm.getInstance().zeroArmEncoder();
+
+
+
     // camera.setResolution(360, 240);
   }
 
@@ -103,6 +112,11 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
       
     }
+
+    // Enable soft limit for arm auto.
+    // Zero arm encoder.
+    SimpleArm.getInstance().enableSoftLimit(true);
+    SimpleArm.getInstance().zeroArmEncoder();
   }
 
   /** This function is called periodically during autonomous. */

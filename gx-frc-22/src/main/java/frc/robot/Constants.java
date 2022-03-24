@@ -32,4 +32,5 @@ public final class Constants {
 
         //distance the arm moves
     public static final double MOVEMENT_DISTANCE = 0.07;
+    public static final int INTAKE_CURRENT_LIMIT = 30;
 }    
