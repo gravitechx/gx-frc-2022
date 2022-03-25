@@ -15,8 +15,8 @@ public class AutoGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoIntake(-0.7, 2000),
-      new AutoDrive(-0.5, 0, 3000)
+      new AutoIntake(-0.7, 10000),
+      new AutoDrive(-0.5, 0, 3000, 10000)
     );
   }
 }

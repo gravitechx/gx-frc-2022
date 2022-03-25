@@ -26,6 +26,7 @@ public class SimpleArm extends SubsystemBase {
   
   /** Creates a new SimpleArm. */
   public SimpleArm() {
+    motor.restoreFactoryDefaults();
 
     // set the soft limit.
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
@@ -55,8 +56,8 @@ public class SimpleArm extends SubsystemBase {
 
   // Set the soft limit
   public void enableSoftLimit(boolean enabled) {
-    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
-    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);
+    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
+    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);
   }
 
   // Zero Arm Encoder

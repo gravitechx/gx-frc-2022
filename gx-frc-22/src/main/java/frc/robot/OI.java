@@ -17,7 +17,7 @@ public class OI {
      * Will be removed later
     */
 
-    public double power = 5;
+    public double power = 2;
 
     private static OI oi;
     private XboxController gameController;
@@ -33,11 +33,11 @@ public class OI {
 
     //return joystick inputs for driving
     public double getThrottleAxis() {
-        return -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
+        return Math.signum(gameController.getRawAxis(DRIVE_THROTTLE_AXIS)) * -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
     }
 
     public double getTurnAxis() {
-        return Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
+        return Math.signum(gameController.getRawAxis(DRIVE_TURN_AXIS)) * Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
     }
     /* Singleton: if you call OI object, this methos will use an object that already exists,
     and if none exists it will create a new instance of the object. Now you can say "getInstance"

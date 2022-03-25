@@ -52,15 +52,15 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton intakeIn = new JoystickButton(OI.getInstance().getController(), 6);
-    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 4); // 4 = Y, 3 = X can be changed
-    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 5);
+    JoystickButton intakeOut = new JoystickButton(OI.getInstance().getController(), 5); // 4 = Y, 3 = X can be changed
+    JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 2);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 1);
 
     intakeIn.whileHeld(new SpinningStickIn(ballIntake));
     intakeOut.whileHeld(new SpinningStickOut(ballIntake));
 
     armUp.whileHeld(new MoveArm(arm, 0.35));
-    armDown.whileHeld(new MoveArm(arm, -0.05));
+    armDown.whileHeld(new MoveArm(arm, -0.3));
   }
 
   /**

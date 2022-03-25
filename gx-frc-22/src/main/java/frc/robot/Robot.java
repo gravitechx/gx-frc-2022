@@ -61,10 +61,12 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     // Arm.getInstance().ZeroArmEncoder();
-    //CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
   
     CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new Drive(DriveTrain.getInstance()));
-    UsbCamera camera = CameraServer.startAutomaticCapture();
+    // UsbCamera camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(320, 240);
+    // camera.setFPS(30);
 
     // We need a soft limit for robotInit and autoInit
     // enable soft limit for both up and down. Zero the arm encoder.

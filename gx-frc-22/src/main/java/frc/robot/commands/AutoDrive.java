@@ -13,15 +13,17 @@ public class AutoDrive extends CommandBase {
   private double throttle;
   private double turn;
   private long time;
+  private long timeout;
 
   /** Creates a new AutoTest. */
-  public AutoDrive(double throttle, double turn, long time) {
+  public AutoDrive(double throttle, double turn, long time, long timeout) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(DriveTrain.getInstance());
 
     this.throttle = throttle;
     this.turn = turn;
     this.time = time;
+    this.timeout = timeout;
   }
 
   // Called when the command is initially scheduled.
@@ -33,7 +35,7 @@ public class AutoDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    DriveTrain.getInstance().autoDrive(throttle, turn, time); // Time is in MS
+    DriveTrain.getInstance().autoDrive(throttle, turn, time, timeout); // Time is in MS
   }
 
   // Called once the command ends or is interrupted.

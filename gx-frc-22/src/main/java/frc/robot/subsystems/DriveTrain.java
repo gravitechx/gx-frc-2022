@@ -157,6 +157,13 @@ public class DriveTrain extends SubsystemBase {
   
   //Creates a new DriveTrain and sets the deadband and max output according to drivetrain constants
   public DriveTrain() {
+
+    // Reset all motors.
+    talonLFollower.configFactoryDefault();
+    talonRFollower.configFactoryDefault();
+    talonLLeader.configFactoryDefault();
+    talonRLeader.configFactoryDefault();
+
     talonLFollower.follow(talonLLeader);
     talonRFollower.follow(talonRLeader);
     talonRLeader.setInverted(true);
@@ -174,7 +181,9 @@ public class DriveTrain extends SubsystemBase {
     drivetrain.arcadeDrive(throttle, turn, false);
   }
 
-  public void autoDrive(double throttle, double turn, long time) {
+  public void autoDrive(double throttle, double turn, long time, long timeout) {
+    
+
     long start = System.currentTimeMillis();
     long end = start + time;
 
