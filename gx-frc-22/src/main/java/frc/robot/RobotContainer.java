@@ -59,8 +59,8 @@ public class RobotContainer {
     intakeIn.whileHeld(new SpinningStickIn(ballIntake));
     intakeOut.whileHeld(new SpinningStickOut(ballIntake));
 
-    armUp.whileHeld(new MoveArm(arm, 0.35));
-    armDown.whileHeld(new MoveArm(arm, -0.3));
+    armUp.whileHeld(new MoveArm(arm, 0.45));
+    armDown.whileHeld(new MoveArm(arm, -0.25));
   }
 
   /**

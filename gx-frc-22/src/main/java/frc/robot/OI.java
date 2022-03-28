@@ -13,10 +13,6 @@ public class OI {
     private static final int ARM_UP_BUTTON = 0;
     private static final int ARM_DOWN_BUTTON = 6;
 
-    /* Everything with 't' as a comment is used for fine-tuning while testing drive
-     * Will be removed later
-    */
-
     public double power = 2;
 
     private static OI oi;
@@ -33,11 +29,11 @@ public class OI {
 
     //return joystick inputs for driving
     public double getThrottleAxis() {
-        return Math.signum(gameController.getRawAxis(DRIVE_THROTTLE_AXIS)) * -Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
+        return Math.signum(gameController.getRawAxis(DRIVE_THROTTLE_AXIS)) * Math.pow(gameController.getRawAxis(DRIVE_THROTTLE_AXIS), power);
     }
 
     public double getTurnAxis() {
-        return Math.signum(gameController.getRawAxis(DRIVE_TURN_AXIS)) * Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
+        return 0.5 * Math.signum(gameController.getRawAxis(DRIVE_TURN_AXIS)) * Math.pow(gameController.getRawAxis(DRIVE_TURN_AXIS), power);
     }
     /* Singleton: if you call OI object, this methos will use an object that already exists,
     and if none exists it will create a new instance of the object. Now you can say "getInstance"

@@ -158,21 +158,11 @@ public class DriveTrain extends SubsystemBase {
   //Creates a new DriveTrain and sets the deadband and max output according to drivetrain constants
   public DriveTrain() {
 
-    // Reset all motors.
-    talonLFollower.configFactoryDefault();
-    talonRFollower.configFactoryDefault();
-    talonLLeader.configFactoryDefault();
-    talonRLeader.configFactoryDefault();
+    configFalcons();
 
-    talonLFollower.follow(talonLLeader);
-    talonRFollower.follow(talonRLeader);
-    talonRLeader.setInverted(true);
-    talonRFollower.setInverted(true);
-    
     drivetrain.setDeadband(DEADBAND);
     drivetrain.setMaxOutput(MAX_OUTPUT);
 
-    applyChanges();
     setDriveEncoder(0);
   }
 
@@ -266,24 +256,33 @@ public class DriveTrain extends SubsystemBase {
 }
 */
 
-  private void applyChanges() {
-    // Resets motors to factory default
-    talonRLeader.configFactoryDefault();
+  private void configFalcons() {
+
+        // Reset all motors.
+    talonLFollower.configFactoryDefault();
     talonRFollower.configFactoryDefault();
     talonLLeader.configFactoryDefault();
-    talonLFollower.configFactoryDefault();
+    talonRLeader.configFactoryDefault();
+
+    talonLFollower.follow(talonLLeader);
+    talonRFollower.follow(talonRLeader);
+    talonRLeader.setInverted(true);
+    talonRFollower.setInverted(true);
+
+    talonLLeader.configOpenloopRamp(0.3);
+    talonRLeader.configOpenloopRamp(0.3);
 
     //sets voltage compensation (very important!)
-    talonRLeader.configVoltageCompSaturation(VOLT_COMP);
-    talonRFollower.configVoltageCompSaturation(VOLT_COMP);
-    talonLLeader.configVoltageCompSaturation(VOLT_COMP);
-    talonLFollower.configVoltageCompSaturation(VOLT_COMP);
+    // talonRLeader.configVoltageCompSaturation(VOLT_COMP);
+    // talonRFollower.configVoltageCompSaturation(VOLT_COMP);
+    // talonLLeader.configVoltageCompSaturation(VOLT_COMP);
+    // talonLFollower.configVoltageCompSaturation(VOLT_COMP);
 
     // Enables voltage compensation
-    talonRLeader.enableVoltageCompensation(true);
-    talonRFollower.enableVoltageCompensation(true);
-    talonLLeader.enableVoltageCompensation(true);
-    talonLFollower.enableVoltageCompensation(true);
+    // talonRLeader.enableVoltageCompensation(true);
+    // talonRFollower.enableVoltageCompensation(true);
+    // talonLLeader.enableVoltageCompensation(true);
+    // talonLFollower.enableVoltageCompensation(true);
   
     //sets input current limit to motors
     talonRLeader.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, AMP_LIMIT, AMP_LIMIT, 0));

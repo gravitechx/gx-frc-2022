@@ -19,9 +19,9 @@ public class SimpleArm extends SubsystemBase {
 
   private static SimpleArm arm;
 
-  public static float ARM_MAX = 0.0f;
+  public static float ARM_MAX = -0.1f;
   public static double ARM_UP = 0;
-  public static float ARM_DOWN = -37.4f;
+  public static float ARM_DOWN = -38.0f;
 
   
   /** Creates a new SimpleArm. */
@@ -56,8 +56,8 @@ public class SimpleArm extends SubsystemBase {
 
   // Set the soft limit
   public void enableSoftLimit(boolean enabled) {
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);
   }
 
   // Zero Arm Encoder
