@@ -95,6 +95,10 @@ public class Robot extends TimedRobot {
     
     SmartDashboard.putNumber("Right Leader", DriveTrain.getInstance().getRLeader().getSelectedSensorPosition());
     SmartDashboard.putNumber("Left Leader", DriveTrain.getInstance().getLLeader().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Right Follower", DriveTrain.getInstance().getRFollow().getSelectedSensorPosition());
+    SmartDashboard.putNumber("Left Follower", DriveTrain.getInstance().getLFollow().getSelectedSensorPosition());
+
+    SmartDashboard.putNumber("Arm Position", SimpleArm.getInstance().getEncoder().getPosition());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

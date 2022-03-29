@@ -65,6 +65,10 @@ public class SimpleArm extends SubsystemBase {
     encoder.setPosition(0);
   }
 
+  public RelativeEncoder getEncoder() {
+    return encoder;
+  }
+
   public static SimpleArm getInstance() {
     if (arm == null) arm = new SimpleArm();
     return arm;
