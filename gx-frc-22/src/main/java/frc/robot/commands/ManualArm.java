@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.subsystems.SimpleArm;
@@ -22,11 +23,19 @@ public class ManualArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (OI.getInstance().getArmUp() > 0) {
-      SimpleArm.getInstance().manualArm(OI.getInstance().getArmUp());
-    } else if (OI.getInstance().getArmDown() > 0) {
-      SimpleArm.getInstance().manualArm(OI.getInstance().getArmDown());
+    SmartDashboard.putNumber("Arm Up", OI.getInstance().getArmUp());
+    SmartDashboard.putNumber("Arm Down", OI.getInstance().getArmDown());
+
+    if (OI.getInstance().getArmUp() > 0 || OI.getInstance().getArmDown() < 0) {
+      SmartDashboard.putString("inside if?", "yes");
+      if (OI.getInstance().getArmUp() > 0) {
+        SimpleArm.getInstance().manualArm(OI.getInstance().getArmUp());
+      }
+      if (OI.getInstance().getArmDown() < 0) {
+        SimpleArm.getInstance().manualArm(OI.getInstance().getArmDown());
+      }
     } else {
+      SmartDashboard.putString("inside if?", "nah");
       SimpleArm.getInstance().manualArm(0.02);
     }
   }

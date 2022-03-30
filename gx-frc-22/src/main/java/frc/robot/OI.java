@@ -14,8 +14,8 @@ public class OI {
     private static final double ARM_UP_SPEED = 0.4;
     private static final double ARM_DOWN_SPEED = -0.25;
 
-    private static final double DEADBAND_UP = 0.1;
-    private static final double DEADBAND_DOWN = 0.1; 
+    private static final double DEADBAND_UP = 0.05;
+    private static final double DEADBAND_DOWN = 0.05; 
 
     public double power = 2;
 
