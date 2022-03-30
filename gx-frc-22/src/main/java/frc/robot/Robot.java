@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SimpleArm;
 import frc.robot.commands.Drive;
+import frc.robot.commands.ManualArm;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
   
     CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new Drive(DriveTrain.getInstance()));
+    CommandScheduler.getInstance().setDefaultCommand(SimpleArm.getInstance(), new ManualArm());
     // UsbCamera camera = CameraServer.startAutomaticCapture();
     // camera.setResolution(320, 240);
     // camera.setFPS(30);
@@ -72,8 +74,6 @@ public class Robot extends TimedRobot {
     // enable soft limit for both up and down. Zero the arm encoder.
     SimpleArm.getInstance().enableSoftLimit(true);
     SimpleArm.getInstance().zeroArmEncoder();
-
-
 
     // camera.setResolution(360, 240);
   }

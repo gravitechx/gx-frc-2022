@@ -30,13 +30,13 @@ public class MoveArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SimpleArm.getInstance().spinArm(speed);
+    SimpleArm.getInstance().manualArm(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SimpleArm.getInstance().spinArm(0.02);
+    SimpleArm.getInstance().manualArm(0.02);
   }
 
   // Returns true when the command should end.

@@ -5,12 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.OI;
 import frc.robot.subsystems.SimpleArm;
 
-public class AutoArm extends CommandBase {
-  /** Creates a new AutoArm. */
-  public AutoArm() {
+public class ManualArm extends CommandBase {
+  /** Creates a new ManualArm. */
+  public ManualArm() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(SimpleArm.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -20,7 +22,13 @@ public class AutoArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SimpleArm.getInstance().autoArm(-0.2, 2);
+    if (OI.getInstance().getArmUp() > 0) {
+      SimpleArm.getInstance().manualArm(OI.getInstance().getArmUp());
+    } else if (OI.getInstance().getArmDown() > 0) {
+      SimpleArm.getInstance().manualArm(OI.getInstance().getArmDown());
+    } else {
+      SimpleArm.getInstance().manualArm(0.02);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -30,6 +38,6 @@ public class AutoArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

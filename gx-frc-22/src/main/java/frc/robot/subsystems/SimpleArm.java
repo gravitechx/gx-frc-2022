@@ -31,6 +31,7 @@ public class SimpleArm extends SubsystemBase {
     // set the soft limit.
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ARM_DOWN);
+    motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     SmartDashboard.putNumber("encoder position", encoder.getPosition());
   }
 
@@ -41,7 +42,7 @@ public class SimpleArm extends SubsystemBase {
 
   }
 
-  public void spinArm(double speed) {
+  public void manualArm(double speed) {
     motor.set(speed);
   }
 
