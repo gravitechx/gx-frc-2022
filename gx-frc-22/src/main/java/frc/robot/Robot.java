@@ -111,6 +111,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   //@Override
   public void autonomousInit() {
+    SimpleArm.getInstance().zeroArmEncoder();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -122,7 +123,6 @@ public class Robot extends TimedRobot {
     // Enable soft limit for arm auto.
     // Zero arm encoder.
     SimpleArm.getInstance().enableSoftLimit(true);
-    SimpleArm.getInstance().zeroArmEncoder();
   }
 
   /** This function is called periodically during autonomous. */

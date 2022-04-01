@@ -2,47 +2,40 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-// Buttons still work
-
-// USES SIMPLE ARM 
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.SimpleArm;
+import frc.robot.subsystems.DriveTrain;
 
-public class MoveArm extends CommandBase {
-  private double speed = 0;
+// Drives at a set speed.
+public class DriveSetSpeed extends CommandBase {
 
-  SimpleArm arm;
-  /** Creates a new SpinArm. */
-  public MoveArm(SimpleArm subsystem, double speed) {
+  // Drive subsystem 
+  private final DriveTrain driveTrain;
+  private double speed;
+
+  /** Creates a new DriveSetSpeed. */
+  // Add DriveTrain as a subsystem
+  public DriveSetSpeed(DriveTrain subsystem, double speed) {
+    driveTrain = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    arm = subsystem;
-    addRequirements(arm);
+    addRequirements(driveTrain);
     this.speed = speed;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    // Allows bypass to soft limits in case chain rachets during a match
-    SimpleArm.getInstance().enableSoftLimit(false);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SimpleArm.getInstance().manualArm(speed);
+    driveTrain.arcadeDrive(speed, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    SimpleArm.getInstance().enableSoftLimit(true);
-    SimpleArm.getInstance().manualArm(0.02);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

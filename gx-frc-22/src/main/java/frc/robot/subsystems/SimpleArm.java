@@ -21,7 +21,7 @@ public class SimpleArm extends SubsystemBase {
 
   public static float ARM_MAX = -0.1f;
   public static double ARM_UP = 0;
-  public static float ARM_DOWN = -38.0f;
+  public static float ARM_DOWN = -36.4f;
 
   
   /** Creates a new SimpleArm. */
@@ -31,7 +31,7 @@ public class SimpleArm extends SubsystemBase {
     // set the soft limit.
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ARM_MAX);
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ARM_DOWN);
-    motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    motor.setIdleMode(CANSparkMax.IdleMode.kCoast);
     SmartDashboard.putNumber("encoder position", encoder.getPosition());
   }
 
@@ -40,6 +40,9 @@ public class SimpleArm extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("encoder position", encoder.getPosition());
 
+    // Get the soft limit
+    SmartDashboard.putNumber("Soft Limit Forward", motor.getSoftLimit(CANSparkMax.SoftLimitDirection.kForward));
+    SmartDashboard.putNumber("Soft Limit Reverse", motor.getSoftLimit(CANSparkMax.SoftLimitDirection.kReverse));
   }
 
   public void manualArm(double speed) {

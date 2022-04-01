@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 //import frc.robot.commands.SpinningStickIn;
@@ -23,6 +24,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SimpleArm;
 import frc.robot.commands.AutoDrive;
 import frc.robot.commands.AutoGroup;
+import frc.robot.commands.DriveSetSpeed;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -37,6 +39,8 @@ public class RobotContainer {
   private final SimpleArm arm = SimpleArm.getInstance();
   private final BallIntake ballIntake = BallIntake.getInstance();
   private final AutoGroup autoCommand = new AutoGroup();
+
+  private static final double DRIVE_SET_SPEED = 0.30;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,11 +60,21 @@ public class RobotContainer {
     JoystickButton armUp = new JoystickButton(OI.getInstance().getController(), 2);
     JoystickButton armDown = new JoystickButton(OI.getInstance().getController(), 1);
 
+    // dpad buttons, set speed
+    JoystickButton setSpeedForward = new JoystickButton(OI.getInstance().getController(), 4);
+    JoystickButton setSpeedBackward = new JoystickButton(OI.getInstance().getController(), 3);
+
     intakeIn.whileHeld(new SpinningStickIn(ballIntake));
     intakeOut.whileHeld(new SpinningStickOut(ballIntake));
 
-    armUp.whileHeld(new MoveArm(arm, 0.45));
+    armUp.whileHeld(new MoveArm(arm, 0.55));
     armDown.whileHeld(new MoveArm(arm, -0.25));
+
+    // Move forward at set speed.
+    // Uses the same drive object as auto, is that fine?
+    setSpeedForward.whileHeld(new DriveSetSpeed(autoSubsystem, 0.50));
+    setSpeedBackward.whileHeld(new DriveSetSpeed(autoSubsystem, -0.30));
+
   }
 
   /**
