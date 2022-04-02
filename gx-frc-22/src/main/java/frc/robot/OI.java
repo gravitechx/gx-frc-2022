@@ -17,6 +17,10 @@ public class OI {
     private static final double DEADBAND_UP = 0.1;
     private static final double DEADBAND_DOWN = 0.1; 
 
+    // The backup controller joyostick ports
+    // forward backward = 1 (y axis) (reverse)
+    // left right = 2 (z axis)
+    
     // The set speed for the d-pad
     // private static final double DRIVE_SET_SPEED = 0.20;
 

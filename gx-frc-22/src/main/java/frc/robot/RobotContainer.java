@@ -41,6 +41,16 @@ public class RobotContainer {
   private final AutoGroup autoCommand = new AutoGroup();
 
   private static final double DRIVE_SET_SPEED = 0.30;
+  
+  /*
+    arm up = 3
+    armdown = 2
+    spin in = 6
+    spin out = 5
+
+    forward backward = 1 (y axis) (reverse)
+    left right = 2 (z axis)
+  */
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

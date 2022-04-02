@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
 
     // We need a soft limit for robotInit and autoInit
     // enable soft limit for both up and down. Zero the arm encoder.
-    SimpleArm.getInstance().enableSoftLimit(true);
+    // SimpleArm.getInstance().enableSoftLimit(true);
     SimpleArm.getInstance().zeroArmEncoder();
 
     // camera.setResolution(360, 240);
@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
 
     // Enable soft limit for arm auto.
     // Zero arm encoder.
-    SimpleArm.getInstance().enableSoftLimit(true);
+    // SimpleArm.getInstance().enableSoftLimit(true);
   }
 
   /** This function is called periodically during autonomous. */
