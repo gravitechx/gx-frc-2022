@@ -17,8 +17,10 @@ public class SimpleArm extends SubsystemBase {
   CANSparkMax motor = new CANSparkMax(Constants.ARM_NEO_ID, MotorType.kBrushless);
   RelativeEncoder encoder = motor.getEncoder(Type.kHallSensor, 42);
 
+  // declare arm.
   private static SimpleArm arm;
 
+  // Set limits for the arm encoding.
   public static float ARM_MAX = -0.1f;
   public static double ARM_UP = 0;
   public static float ARM_DOWN = -36.4f;
@@ -26,6 +28,8 @@ public class SimpleArm extends SubsystemBase {
   
   /** Creates a new SimpleArm. */
   public SimpleArm() {
+
+    // Reset all motor settings
     motor.restoreFactoryDefaults();
 
     // set the soft limit.
@@ -45,10 +49,12 @@ public class SimpleArm extends SubsystemBase {
     SmartDashboard.putNumber("Soft Limit Reverse", motor.getSoftLimit(CANSparkMax.SoftLimitDirection.kReverse));
   }
 
+  // Set the speed of the arm manually
   public void manualArm(double speed) {
     motor.set(speed);
   }
 
+  // Auto
   public void autoArm(double speed, long time) {
     long start = System.currentTimeMillis();
     long end = start + time;
@@ -58,7 +64,7 @@ public class SimpleArm extends SubsystemBase {
     }
   }
 
-  // Set the soft limit
+  // enable the soft limit
   public void enableSoftLimit(boolean enabled) {
     motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, enabled);
     motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, enabled);

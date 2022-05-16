@@ -15,6 +15,7 @@ public class BallIntake extends SubsystemBase {
   static private CANSparkMax leader = new CANSparkMax(Constants.BALL_INTAKE_MOTOR, MotorType.kBrushless);
   static BallIntake intake;
 
+  // Set the current limit in the constructor.
   public BallIntake() {
     // Set a current limit of 30 amps.
     leader.setSmartCurrentLimit(Constants.INTAKE_CURRENT_LIMIT);
@@ -25,15 +26,20 @@ public class BallIntake extends SubsystemBase {
     // This method will be called once per scheduler run
 
   }
+
+  // Spin the ball outtake in.
   public void ballIn()
   {
     leader.set(Constants.SPIN_SPEED);
   }
+
+  // out is the opposite of the input. The speed is the same.
   public void ballOut()
   {
     leader.set(Constants.SPIN_SPEED_REVERSE);
   }
 
+  // This sets the speed for the ball in and out.
   public void setSpeed(double speed)
   {
     leader.set(speed);

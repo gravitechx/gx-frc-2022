@@ -171,6 +171,7 @@ public class DriveTrain extends SubsystemBase {
     drivetrain.arcadeDrive(throttle, turn, false);
   }
 
+  // Auto
   public void autoDrive(double throttle, double turn, long time, long timeout) {
     
 
@@ -183,11 +184,12 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
+  // stops all talons, set the speed to 0.
   public void stop() {
     talonLLeader.set(0);
     talonRLeader.set(0);
   }
-
+  
   public void setDriveEncoder(int value) {
     talonRLeader.setSelectedSensorPosition(value);
     talonLLeader.setSelectedSensorPosition(value);
@@ -206,55 +208,6 @@ public class DriveTrain extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
-
-  /*
-  Stuff added to Arm. Not used.
-  public void zeroDriveEncoders() {
-    talonRLeader.setSelectedSensorPosition(0);
-  
-  }
-
-  // resets the position PID controller integral/error and sets the output to 0%
-
-
-  // sets the position PID controller targets
-  
-  public void setPositionPIDMeters(double Rtarget) {
-   // talonRLeader.set(ControlMode.Position, Rtarget * METER_TO_ENCODER,
-     // DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
-    //talonLLeader.set(ControlMode.Position, Ltarget * METER_TO_ENCODER,
-     // DemandType.ArbitraryFeedForward, PID_POS_S*Math.signum(talonRLeader.getClosedLoopError())); 
-  }
-
-  
-
-  // sets the velocity PID controller targets
-  public void setVelocityPIDMetersPerSecond(double Rtarget, double Ltarget) {
-    Rtarget = Util.constrain(Rtarget, -MAX_SPEED, MAX_SPEED); // keep within limits
-    double Rcom = Math.signum(Rtarget) * PID_VEL_S; // static feedforward
-    
-
-    // command motor controllers
-   
-    
-  } 
-
-  // getters for the drivemotors in case we need their encoder values or something
-  
-
-  // a Java lamba that applies a setting to all of something. See the constructor of this class for usage. 
-  // Copied from HarkerRoboLib HSSwerve.
-  
-
-  public static DriveTrain getInstance() {
-    if (drivetrain == null) {
-      drivetrain = new DriveTrain();
-    }
-    return drivetrain;
-  }
-
-}
-*/
 
   private void configFalcons() {
 
@@ -294,6 +247,7 @@ public class DriveTrain extends SubsystemBase {
     talonLLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
   
+  // Makes sure there is only one instance of DriveTrain.
   public static DriveTrain getInstance() {
     if (driveTrain == null) driveTrain = new DriveTrain();
     return driveTrain;
