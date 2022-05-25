@@ -6,7 +6,7 @@ public class OI {
     //define which button or joystick is used here 
     private static final int DRIVE_THROTTLE_AXIS = 1;
   
-    private static final int DRIVE_TURN_AXIS = 4;
+    private static final int DRIVE_TURN_AXIS = 2;
     //buttons below are PLACEHOLDERS
     private static final int ARM_UP_PORT = 3;
     private static final int ARM_DOWN_PORT = 2;
